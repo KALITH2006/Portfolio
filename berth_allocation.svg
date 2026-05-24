@@ -1,0 +1,93 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001f3f;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#003d5c;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="portGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:0.2" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Water Background -->
+  <rect width="800" height="400" fill="url(#waterGradient)"/>
+
+  <!-- Port Infrastructure -->
+  <rect x="0" y="0" width="800" height="60" fill="#0a1628" opacity="0.7"/>
+  <text x="20" y="40" font-size="24" font-weight="bold" fill="#00f5ff" font-family="monospace">CHENNAI PORT</text>
+
+  <!-- Berth Allocation System -->
+  <text x="20" y="100" font-size="16" fill="#00f5ff" font-family="monospace">Berth Status:</text>
+
+  <!-- Berth 1 - Occupied -->
+  <g filter="url(#glow)">
+    <rect x="50" y="130" width="120" height="80" fill="#ff4444" stroke="#00f5ff" stroke-width="2" opacity="0.8" rx="8"/>
+    <text x="110" y="165" font-size="14" font-weight="bold" fill="white" text-anchor="middle" font-family="monospace">BERTH 1</text>
+    <text x="110" y="190" font-size="12" fill="#ffcccc" text-anchor="middle" font-family="monospace">Occupied</text>
+  </g>
+
+  <!-- Berth 2 - Available -->
+  <g filter="url(#glow)">
+    <rect x="200" y="130" width="120" height="80" fill="#44ff44" stroke="#00f5ff" stroke-width="2" opacity="0.8" rx="8"/>
+    <text x="260" y="165" font-size="14" font-weight="bold" fill="#003d00" text-anchor="middle" font-family="monospace">BERTH 2</text>
+    <text x="260" y="190" font-size="12" fill="#00aa00" text-anchor="middle" font-family="monospace">Available</text>
+  </g>
+
+  <!-- Berth 3 - Maintenance -->
+  <g filter="url(#glow)">
+    <rect x="350" y="130" width="120" height="80" fill="#ffaa44" stroke="#00f5ff" stroke-width="2" opacity="0.8" rx="8"/>
+    <text x="410" y="165" font-size="14" font-weight="bold" fill="white" text-anchor="middle" font-family="monospace">BERTH 3</text>
+    <text x="410" y="190" font-size="12" fill="#ffeecc" text-anchor="middle" font-family="monospace">Maintenance</text>
+  </g>
+
+  <!-- Berth 4 - Available -->
+  <g filter="url(#glow)">
+    <rect x="500" y="130" width="120" height="80" fill="#44ff44" stroke="#00f5ff" stroke-width="2" opacity="0.8" rx="8"/>
+    <text x="560" y="165" font-size="14" font-weight="bold" fill="#003d00" text-anchor="middle" font-family="monospace">BERTH 4</text>
+    <text x="560" y="190" font-size="12" fill="#00aa00" text-anchor="middle" font-family="monospace">Available</text>
+  </g>
+
+  <!-- Vessel Approaching -->
+  <g filter="url(#glow)">
+    <rect x="650" y="130" width="120" height="80" fill="#00ccff" stroke="#00f5ff" stroke-width="2" opacity="0.8" rx="8"/>
+    <text x="710" y="165" font-size="14" font-weight="bold" fill="#003d5c" text-anchor="middle" font-family="monospace">VESSEL</text>
+    <text x="710" y="190" font-size="12" fill="#0088aa" text-anchor="middle" font-family="monospace">Incoming</text>
+  </g>
+
+  <!-- Analytics Dashboard -->
+  <text x="20" y="260" font-size="16" fill="#00f5ff" font-family="monospace">Analytics:</text>
+
+  <!-- Utilization Bar 1 -->
+  <g>
+    <text x="20" y="295" font-size="12" fill="#b0c4de" font-family="monospace">Port Utilization</text>
+    <rect x="200" y="285" width="300" height="20" fill="#1a3a52" stroke="#00f5ff" stroke-width="1" rx="4"/>
+    <rect x="200" y="285" width="225" height="20" fill="#00f5ff" rx="4" opacity="0.7"/>
+    <text x="510" y="300" font-size="12" fill="#00f5ff" font-family="monospace">75%</text>
+  </g>
+
+  <!-- Utilization Bar 2 -->
+  <g>
+    <text x="20" y="335" font-size="12" fill="#b0c4de" font-family="monospace">Turnaround Time</text>
+    <rect x="200" y="325" width="300" height="20" fill="#1a3a52" stroke="#00f5ff" stroke-width="1" rx="4"/>
+    <rect x="200" y="325" width="180" height="20" fill="#38bdf8" rx="4" opacity="0.7"/>
+    <text x="510" y="340" font-size="12" fill="#38bdf8" font-family="monospace">60%</text>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="110" y1="210" x2="110" y2="250" stroke="#00f5ff" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+  <line x1="260" y1="210" x2="260" y2="250" stroke="#00f5ff" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+  <line x1="410" y1="210" x2="410" y2="250" stroke="#00f5ff" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+  <line x1="560" y1="210" x2="560" y2="250" stroke="#00f5ff" stroke-width="1" stroke-dasharray="5,5" opacity="0.3"/>
+
+  <!-- Status Indicator -->
+  <circle cx="750" cy="30" r="8" fill="#00ff00" filter="url(#glow)"/>
+  <text x="730" y="35" font-size="12" fill="#00ff00" font-family="monospace">SYSTEM ONLINE</text>
+</svg>
