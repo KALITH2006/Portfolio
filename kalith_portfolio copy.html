@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>KALITH_AI // PORTFOLIO v2.0</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "outline": "#849495",
+            "on-primary": "#003739",
+            "primary-fixed-dim": "#00dce5",
+            "surface-bright": "#343946",
+            "on-background": "#dde2f3",
+            "error-container": "#93000a",
+            "primary": "#e9feff",
+            "tertiary-container": "#ffdb3f",
+            "on-secondary-fixed": "#001e2c",
+            "on-secondary": "#00354a",
+            "on-tertiary-fixed-variant": "#544600",
+            "background": "#0e131f",
+            "tertiary-fixed-dim": "#e7c427",
+            "on-surface-variant": "#b9caca",
+            "on-error-container": "#ffdad6",
+            "surface-tint": "#00dce5",
+            "tertiary-fixed": "#ffe16c",
+            "inverse-surface": "#dde2f3",
+            "on-tertiary-fixed": "#221b00",
+            "on-surface": "#dde2f3",
+            "on-secondary-container": "#00374d",
+            "surface-container-low": "#161c28",
+            "secondary": "#7bd0ff",
+            "on-tertiary-container": "#736000",
+            "on-primary-fixed-variant": "#004f53",
+            "tertiary": "#fff9f0",
+            "secondary-fixed": "#c4e7ff",
+            "surface-container-lowest": "#080e1a",
+            "secondary-container": "#00a6e0",
+            "inverse-primary": "#00696e",
+            "surface": "#0e131f",
+            "surface-container-highest": "#2f3542",
+            "on-error": "#690005",
+            "surface-variant": "#2f3542",
+            "inverse-on-surface": "#2b303d",
+            "on-primary-container": "#006c71",
+            "surface-dim": "#0e131f",
+            "error": "#ffb4ab",
+            "secondary-fixed-dim": "#7bd0ff",
+            "primary-container": "#00f5ff",
+            "surface-container": "#1a202c",
+            "on-primary-fixed": "#002021",
+            "on-secondary-fixed-variant": "#004c69",
+            "surface-container-high": "#242a36",
+            "outline-variant": "#3a494a",
+            "primary-fixed": "#63f7ff",
+            "on-tertiary": "#3a3000"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem"
+          },
+          spacing: {
+            "margin-mobile": "16px",
+            "gutter": "16px",
+            "margin-desktop": "32px",
+            "container-max": "1440px"
+          },
+          fontFamily: {
+            "headline-lg-mobile": ["Space Grotesk"],
+            "body-sm": ["Inter"],
+            "terminal-header": ["Space Mono"],
+            "display-xl": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "label-caps": ["Space Mono"],
+            "body-md": ["Inter"]
+          },
+          fontSize: {
+            "headline-lg-mobile": ["24px", { lineHeight: "1.2", fontWeight: "600" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "terminal-header": ["14px", { lineHeight: "20px", letterSpacing: "0.1em", fontWeight: "500" }],
+            "display-xl": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "600" }],
+            "label-caps": ["12px", { lineHeight: "16px", fontWeight: "700" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ─── CYBER GRID BACKGROUND ─── */
+    @keyframes pan-bg {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 32px 32px;
+      }
+    }
+
+    .cyber-grid {
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      animation: pan-bg 20s linear infinite;
+    }
+
+    /* ─── GLOW HELPERS ─── */
+    .glow-text {
+      text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    }
+
+    .cyan-glow {
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.15);
+    }
+
+    /* ─── GLASSMORPHISM PANEL ─── */
+    .glass-panel {
+      background-color: rgba(11, 17, 32, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 245, 255, 0.05), transparent 40%);
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 0;
+    }
+
+    .glass-panel:hover::after {
+      opacity: 1;
+    }
+
+    .glass-panel>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── FLOATING ANIMATION ─── */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+      animation: float 6s ease-in-out 3s infinite;
+    }
+
+    /* ─── TYPING CURSOR ─── */
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    .cursor {
+      animation: blink 1s step-end infinite;
+      color: #00f5ff;
+    }
+
+    /* ─── TYPING TEXT ─── */
+    .typing-text {
+      color: #00dce5;
+      font-size: 24px;
+      margin-bottom: 30px;
+      font-family: 'Space Grotesk';
+      min-height: 35px;
+    }
+
+    /* ─── PROGRESS BAR FILL ─── */
+    @keyframes fillBar {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: var(--w);
+      }
+    }
+
+    .skill-bar .fill {
+      width: 0;
+      animation: fillBar 1.2s ease-out forwards;
+      animation-play-state: paused;
+    }
+
+    .skill-bar.animate .fill {
+      animation-play-state: running;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── NAV ACTIVE ─── */
+    .nav-link {
+      transition: color .2s, border-color .2s;
+    }
+
+    .nav-link.active {
+      color: #00f5ff;
+      border-bottom: 2px solid #00f5ff;
+    }
+
+    /* ─── MOBILE NAV ─── */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+    }
+
+    #mobile-menu.open {
+      max-height: 400px;
+    }
+
+    /* ─── PARTICLE ─── */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 245, 255, 0.45);
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: .15;
+      }
+
+      50% {
+        opacity: .7;
+      }
+
+      100% {
+        transform: translateY(-80px) translateX(15px);
+        opacity: .15;
+      }
+    }
+
+    /* ─── HERO TERMINAL LINES ─── */
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .term-line {
+      opacity: 0;
+    }
+
+    .term-line:nth-child(1) {
+      animation: fadeIn .4s .8s forwards;
+    }
+
+    .term-line:nth-child(2) {
+      animation: fadeIn .4s 1.4s forwards;
+    }
+
+    .term-line:nth-child(3) {
+      animation: fadeIn .4s 2.0s forwards;
+    }
+
+    .term-line:nth-child(4) {
+      animation: fadeIn .4s 2.6s forwards;
+    }
+
+    /* ─── CERT CARD ─── */
+    .cert-badge {
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.12), rgba(123, 208, 255, 0.06));
+      border: 1px solid rgba(0, 245, 255, 0.2);
+    }
+
+    .cert-badge:hover {
+      border-color: rgba(0, 245, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.12);
+    }
+
+    /* ─── TIMELINE DOT PULSE ─── */
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(1);
+        opacity: .6;
+      }
+
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .timeline-dot::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(0, 245, 255, 0.3);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* ─── FORM FOCUS GLOW ─── */
+    .form-input:focus {
+      outline: none;
+      border-color: #00f5ff;
+      box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.15), 0 0 12px rgba(0, 245, 255, 0.1);
+    }
+
+    /* ─── TOAST ─── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      padding: .75rem 1.5rem;
+      border-radius: .25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform .4s, opacity .4s;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: rgba(0, 245, 255, 0.15);
+      border: 1px solid #00f5ff;
+      color: #00f5ff;
+    }
+
+    #toast.error {
+      background: rgba(147, 0, 10, 0.2);
+      border: 1px solid #93000a;
+      color: #ffdad6;
+    }
+
+    /* ─── SCROLL BAR ─── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #080e1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #00f5ff33;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00f5ff66;
+    }
+
+    /* ─── HERO HEADING GRADIENT ─── */
+    .hero-name {
+      background: linear-gradient(135deg, #e9feff 30%, #00f5ff 70%, #7bd0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.35));
+    }
+
+    /* ─── SECTION HEADING LINE ─── */
+    .section-line::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: #00f5ff;
+      margin-top: 8px;
+      border-radius: 1px;
+      box-shadow: 0 0 8px rgba(0, 245, 255, 0.5);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased relative overflow-x-hidden">
+
+  <!-- ═══════════════════════════════════════ BACKGROUNDS ══ -->
+  <div class="fixed inset-0 cyber-grid pointer-events-none z-0"></div>
+  <div class="fixed inset-0 pointer-events-none z-0 opacity-20"
+    style="background:radial-gradient(circle at 80% 20%,#8B5CF6 0%,transparent 40%)"></div>
+  <div class="fixed inset-0 pointer-events-none z-0" id="particles"></div>
+
+  <!-- ═══════════════════════════════════════ NAVBAR ══ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    style="background:rgba(14,19,31,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08);box-shadow:0 0 20px rgba(0,245,255,0.1)">
+    <div class="max-w-[1440px] mx-auto px-8 flex items-center justify-between h-[69px]">
+
+      <!-- Logo -->
+      <a href="#hero"
+        class="font-display-xl text-xl font-semibold text-primary-container tracking-tight hover:scale-105 transition-transform duration-300 whitespace-nowrap">
+        MOHAMED KALITH
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#hero"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1 active"
+          data-section="hero">About</a>
+        <a href="#skills"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1"
+          data-section="skills">Skills</a>
+        <a href="#projects"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1"
+          data-section="projects">Projects</a>
+        <a href="#experience"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1"
+          data-section="experience">Internships</a>
+        <a href="#education-certifications"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1"
+          data-section="education-certifications">Certifications</a>
+        <a href="#contact"
+          class="nav-link font-terminal-header text-sm text-on-surface-variant hover:text-primary-container pb-1"
+          data-section="contact">Contact</a>
+      </div>
+
+      <!-- CTA + Hamburger -->
+      <div class="flex items-center gap-4">
+        <a href="#contact"
+          class="bg-primary-container text-[#0e131f] font-terminal-header text-sm px-6 py-2 rounded uppercase hover:shadow-[0_0_25px_rgba(0,245,255,0.5)] hover:scale-105 transition-all duration-300 hidden md:block">
+          CONNECT
+        </a>
+        <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+          <span class="block w-6 h-0.5 bg-primary-container transition-all duration-300" id="h1"></span>
+          <span class="block w-6 h-0.5 bg-primary-container transition-all duration-300" id="h2"></span>
+          <span class="block w-4 h-0.5 bg-primary-container transition-all duration-300" id="h3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden border-t border-white/5">
+      <div class="px-8 py-4 flex flex-col gap-4">
+        <a href="#hero" class="font-terminal-header text-sm text-on-surface-variant hover:text-primary-container"
+          onclick="closeMobileMenu()">About</a>
+        <a href="#skills" class="font-terminal-header text-sm text-on-surface-variant hover:text-primary-container"
+          onclick="closeMobileMenu()">Skills</a>
+        <a href="#projects" class="font-terminal-header text-sm text-on-surface-variant hover:text-primary-container"
+          onclick="closeMobileMenu()">Projects</a>
+        <a href="#experience" class="font-terminal-header text-sm text-on-surface-variant hover:text-primary-container"
+          onclick="closeMobileMenu()">Internships</a>
+        <a href="#contact" class="font-terminal-header text-sm text-on-surface-variant hover:text-primary-container"
+          onclick="closeMobileMenu()">Contact</a>
+        <a href="#contact"
+          class="bg-primary-container text-[#0e131f] font-terminal-header text-sm px-6 py-2 rounded uppercase text-center mt-2"
+          onclick="closeMobileMenu()">CONNECT</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ MAIN ══ -->
+  <main class="flex-grow z-10 relative mt-[69px]">
+
+    <!-- ─── HERO ─── -->
+    <section id="hero"
+      class="max-w-[1440px] mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-69px)]">
+
+      <!-- Left -->
+      <div class="flex flex-col gap-6">
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 border border-primary-container/30 px-3 py-1 rounded bg-primary-container/10 w-fit animate-float">
+          <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          <span class="font-label-caps text-label-caps text-primary-container tracking-widest">AI ENGINEER</span>
+        </div>
+
+        <!-- Name -->
+        <h1 class="font-display-xl text-display-xl hero-name leading-tight">MOHAMED KALITH K</h1>
+
+        <!-- Role -->
+        <p class="font-headline-lg text-xl md:text-2xl text-on-surface-variant leading-snug">
+          <span class="typing-text"></span>
+        </p>
+
+        <!-- Description -->
+        <p class="font-body-md text-on-surface-variant/80 text-sm leading-relaxed max-w-md">
+          Building intelligent systems, secure platforms, and futuristic digital experiences through AI engineering and
+          modern technologies.
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-4 mt-2">
+          <a href="#projects"
+            class="bg-primary-container text-[#0e131f] font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] hover:scale-105 transition-all duration-300">
+            View Projects
+            <span class="material-symbols-outlined text-base leading-none">arrow_forward</span>
+          </a>
+          <a href="./resume.pdf" download="MOHAMED_KALITH_K_Resume.pdf"
+            class="border border-outline text-secondary font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:border-primary-container hover:text-primary-container hover:bg-primary-container/5 hover:scale-105 transition-all duration-300">
+            Download Resume
+            <span class="material-symbols-outlined text-base leading-none">download</span>
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex gap-8 mt-6 pt-6 border-t border-white/10">
+          <div class="flex flex-col gap-1">
+            <span class="font-terminal-header text-xs text-outline tracking-widest">SYSTEM_UPTIME</span>
+            <span class="font-terminal-header text-sm text-primary-container">99.9%</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="font-terminal-header text-xs text-outline tracking-widest">AI_MOD_ACTIVE</span>
+            <span class="font-terminal-header text-sm text-primary-container">12</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right — Terminal Card -->
+      <div class="glass-panel rounded-lg p-6 flex flex-col gap-4 h-[500px] cyan-glow animate-float-delayed">
+        <!-- Terminal Header -->
+        <div class="flex justify-between items-center border-b border-white/10 pb-4 shrink-0">
+          <div class="border-r-2 border-primary-container/70 pr-2">
+            <span class="font-terminal-header text-sm text-on-surface tracking-widest">MOHAMED_KALITH_AI_SYSTEM</span>
+          </div>
+          <div class="flex gap-2">
+            <span
+              class="w-3 h-3 rounded-full bg-error-container cursor-pointer hover:shadow-[0_0_10px_#93000a] transition-shadow"></span>
+            <span
+              class="w-3 h-3 rounded-full bg-tertiary-container cursor-pointer hover:shadow-[0_0_10px_#ffdb3f] transition-shadow"></span>
+            <span
+              class="w-3 h-3 rounded-full bg-primary-container cursor-pointer hover:shadow-[0_0_10px_#00f5ff] transition-shadow"></span>
+          </div>
+        </div>
+
+        <!-- Terminal Body -->
+        <div class="flex-grow grid grid-cols-2 gap-4 min-h-0">
+
+          <!-- Left pane: Terminal log -->
+          <div
+            class="bg-[#050816]/80 p-4 rounded border border-white/5 flex flex-col gap-2 overflow-hidden hover:bg-[#050816] transition-colors duration-300">
+            <span class="font-terminal-header text-xs text-outline tracking-widest mb-1">STATUS.INIT</span>
+            <div class="term-line font-terminal-header text-xs text-secondary leading-5">
+              &gt; Neural Network: <span class="text-primary-container">ACTIVE</span>
+            </div>
+            <div class="term-line font-terminal-header text-xs text-secondary leading-5">
+              &gt; Security: <span class="text-primary-container">ENABLED</span>
+            </div>
+            <div class="term-line font-terminal-header text-xs text-secondary leading-5">
+              &gt; Modules: <span class="text-primary-container">ONLINE</span>
+            </div>
+            <div class="term-line font-terminal-header text-xs text-secondary leading-5">
+              &gt; <span class="cursor">_</span>
+            </div>
+          </div>
+
+          <!-- Right pane: Holographic visual -->
+          <div
+            class="bg-[#050816]/80 rounded border border-white/5 relative overflow-hidden flex items-center justify-center group hover:bg-[#050816] transition-colors duration-300">
+            <div
+              class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary-container/5 z-10 pointer-events-none">
+            </div>
+            <!-- SVG neural net visualization -->
+            <svg
+              class="w-full h-full opacity-60 mix-blend-screen group-hover:opacity-90 transition-opacity duration-700"
+              viewBox="0 0 220 300" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="holo" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.8" />
+                  <stop offset="60%" stop-color="#7bd0ff" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+                </radialGradient>
+                <filter id="glow-f">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <!-- Connecting lines -->
+              <g stroke="#00f5ff" stroke-opacity="0.2" stroke-width="0.5">
+                <line x1="110" y1="50" x2="60" y2="120" />
+                <line x1="110" y1="50" x2="160" y2="120" />
+                <line x1="60" y1="120" x2="40" y2="200" />
+                <line x1="60" y1="120" x2="110" y2="200" />
+                <line x1="160" y1="120" x2="110" y2="200" />
+                <line x1="160" y1="120" x2="180" y2="200" />
+                <line x1="40" y1="200" x2="110" y2="260" />
+                <line x1="180" y1="200" x2="110" y2="260" />
+                <line x1="110" y1="200" x2="110" y2="260" />
+              </g>
+              <!-- Brighter accent lines -->
+              <g stroke="#00f5ff" stroke-opacity="0.5" stroke-width="0.8" filter="url(#glow-f)">
+                <line x1="110" y1="50" x2="110" y2="200" />
+                <line x1="60" y1="120" x2="180" y2="200" />
+              </g>
+              <!-- Nodes -->
+              <g filter="url(#glow-f)">
+                <!-- Layer 1 -->
+                <circle cx="110" cy="50" r="6" fill="#00f5ff" fill-opacity="0.9" />
+                <!-- Layer 2 -->
+                <circle cx="60" cy="120" r="5" fill="#00f5ff" fill-opacity="0.7" />
+                <circle cx="160" cy="120" r="5" fill="#7bd0ff" fill-opacity="0.7" />
+                <!-- Layer 3 -->
+                <circle cx="40" cy="200" r="4" fill="#00f5ff" fill-opacity="0.6" />
+                <circle cx="110" cy="200" r="6" fill="#00f5ff" fill-opacity="0.9" />
+                <circle cx="180" cy="200" r="4" fill="#7bd0ff" fill-opacity="0.6" />
+                <!-- Layer 4 -->
+                <circle cx="110" cy="260" r="7" fill="#00f5ff" fill-opacity="1" />
+              </g>
+              <!-- Pulse rings -->
+              <circle cx="110" cy="50" r="12" fill="none" stroke="#00f5ff" stroke-opacity="0.2" stroke-width="1">
+                <animate attributeName="r" values="8;20;8" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="110" cy="260" r="14" fill="none" stroke="#00f5ff" stroke-opacity="0.3" stroke-width="1">
+                <animate attributeName="r" values="10;24;10" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" begin="1.5s"
+                  repeatCount="indefinite" />
+              </circle>
+              <!-- Ambient glow sphere -->
+              <ellipse cx="110" cy="155" rx="80" ry="100" fill="url(#holo)" fill-opacity="0.15" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SKILLS ─── -->
+    <section id="skills" class="max-w-[1440px] mx-auto px-8 py-24 reveal">
+      <div class="mb-12 flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary-container text-3xl">developer_board</span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+          Core Technologies &amp; Engineering Systems
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6" id="skills-grid">
+        <!-- Python -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">code</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Python</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:90%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- React -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">web</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              React</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:85%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Next.js -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">javascript</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Next.js</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:80%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- FastAPI -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">api</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              FastAPI</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:75%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Transformer -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">psychology</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Transformer</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:80%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- PyTorch -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">model_training</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              PyTorch</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:70%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- PostgreSQLx -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">database</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              PostgreSQL</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:85%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Docker -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">view_in_ar</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Docker</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:75%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Linux -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">terminal</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Linux</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:90%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Cybersecurity -->
+        <div
+          class="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer skill-card">
+          <div
+            class="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <span
+              class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">security</span>
+          </div>
+          <div class="w-full text-center">
+            <h4
+              class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-3">
+              Cybersecurity</h4>
+            <div class="skill-bar w-full bg-white/10 h-1 rounded overflow-hidden">
+              <div class="fill bg-primary-container h-full rounded" style="--w:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS ─── -->
+    <section id="projects" class="max-w-[1440px] mx-auto px-8 py-24 border-t border-white/5 reveal">
+      <div class="mb-12 flex items-center gap-4">
+        <span class="material-symbols-outlined text-primary-container text-3xl">dns</span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+          Featured Engineering Projects
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Ride Relief -->
+        <div
+          class="glass-panel rounded-xl overflow-hidden group flex flex-col hover:shadow-[0_0_30px_rgba(0,245,255,0.1)] hover:-translate-y-1 transition-all duration-500">
+          <div class="h-48 bg-[#050816] relative overflow-hidden shrink-0">
+            <div
+              class="absolute inset-0 bg-primary-container/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            </div>
+            <!-- SVG placeholder for Ride Relief -->
+            <svg class="w-full h-full opacity-60 mix-blend-screen" viewBox="0 0 400 200"
+              xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="rr" cx="30%" cy="60%" r="50%">
+                  <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.6" />
+                  <stop offset="100%" stop-color="#050816" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="200" fill="#050816" />
+              <rect width="400" height="200" fill="url(#rr)" />
+              <!-- Road -->
+              <rect x="0" y="140" width="400" height="20" fill="#0e131f" stroke="rgba(0,245,255,0.15)"
+                stroke-width="1" />
+              <rect x="60" y="148" width="40" height="4" fill="rgba(255,219,63,0.4)" rx="2" />
+              <rect x="160" y="148" width="40" height="4" fill="rgba(255,219,63,0.4)" rx="2" />
+              <rect x="260" y="148" width="40" height="4" fill="rgba(255,219,63,0.4)" rx="2" />
+              <!-- Vehicle silhouette -->
+              <rect x="150" y="110" width="100" height="30" fill="rgba(0,245,255,0.25)" rx="4" />
+              <rect x="165" y="94" width="70" height="18" fill="rgba(0,245,255,0.35)" rx="3" />
+              <circle cx="170" cy="142" r="10" fill="rgba(0,245,255,0.4)" />
+              <circle cx="230" cy="142" r="10" fill="rgba(0,245,255,0.4)" />
+              <!-- Glow dots (route) -->
+              <circle cx="50" cy="100" r="3" fill="#00f5ff" fill-opacity="0.8" />
+              <circle cx="100" cy="80" r="3" fill="#00f5ff" fill-opacity="0.6" />
+              <circle cx="310" cy="90" r="3" fill="#00f5ff" fill-opacity="0.7" />
+              <circle cx="360" cy="70" r="3" fill="#7bd0ff" fill-opacity="0.5" />
+              <polyline points="50,100 100,80 200,80 310,90 360,70" fill="none" stroke="#00f5ff" stroke-opacity="0.3"
+                stroke-width="1" stroke-dasharray="4,4" />
+            </svg>
+            <div class="absolute top-4 right-4 z-20">
+              <span
+                class="px-2 py-1 bg-[#050816]/80 text-primary-container font-terminal-header text-[10px] rounded border border-primary-container/30 backdrop-blur-sm tracking-wider">STATUS:
+                ACTIVE</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3
+              class="font-headline-lg text-2xl text-on-surface group-hover:text-primary-container transition-colors mb-2">
+              Smart Vehicle Assistance platform</h3>
+            <p class="font-body-md text-on-surface-variant text-sm mb-6 leading-relaxed flex-grow">
+              AI-powered emergency mobility and roadside assistance platform with PWA architecture, real-time services,
+              Firebase backend, and modern mobile-first experience.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">React</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">FastAPI</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">MongoDB</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">AI</span>
+            </div>
+            <div class="flex gap-3">
+              <a href="https://github.com/KALITH2006/Ride_Relief"
+                class="flex-1 border border-white/15 text-on-surface-variant font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:border-primary-container hover:text-primary-container transition-all">
+                <span class="material-symbols-outlined text-base leading-none">code</span> GitHub
+              </a>
+              <a href="https://ride-relief-tkm.vercel.app"
+                class="flex-1 border border-primary-container/40 text-primary-container font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-all">
+                <span class="material-symbols-outlined text-base leading-none">open_in_new</span> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SMART BERTH ALLOCATION -->
+
+        <div
+          class="glass-panel rounded-xl overflow-hidden group flex flex-col hover:shadow-[0_0_30px_rgba(0,245,255,0.08)] hover:-translate-y-1 transition-all duration-500">
+
+          <!-- IMAGE -->
+
+          <div class="h-48 bg-[#050816] relative overflow-hidden shrink-0">
+
+            <div
+              class="absolute inset-0 bg-primary-container/5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            </div>
+
+            <img src="berth_allocation.svg" alt="Smart Berth Allocation System"
+              class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" />
+
+            <!-- STATUS -->
+
+            <div class="absolute top-4 right-4 z-20">
+
+              <span
+                class="px-2 py-1 bg-[#050816]/80 text-primary-container font-terminal-header text-[10px] rounded border border-primary-container/30 backdrop-blur-sm tracking-wider">
+
+                STATUS: ACTIVE
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- CONTENT -->
+
+          <div class="p-6 flex flex-col flex-grow">
+
+            <!-- TITLE -->
+
+            <h3
+              class="font-headline-lg text-2xl text-on-surface group-hover:text-primary-container transition-colors mb-2">
+
+              Smart Berth Allocation System
+
+            </h3>
+
+            <!-- DESCRIPTION -->
+
+            <p class="font-body-md text-on-surface-variant text-sm mb-6 leading-relaxed flex-grow">
+
+              A full-stack berth management platform developed using React frontend,
+              Flask REST API, SQL Server database, and Tkinter desktop dashboard.
+              Designed for real-time vessel tracking, berth scheduling, analytics visualization, and secure port
+              automation workflows.
+
+            </p>
+
+
+            <!-- TECH STACK -->
+
+            <div class="flex flex-wrap gap-2 mb-6">
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                React
+              </span>
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                Flask API
+              </span>
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                SQL Server
+              </span>
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                Tkinter
+              </span>
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                Python
+              </span>
+
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">
+                Tailwind CSS
+              </span>
+
+            </div>
+
+            <!-- BUTTONS -->
+
+            <div class="flex gap-3">
+
+              <a href="https://github.com/KALITH2006/Smart_Berth_Allocation" target="_blank"
+                class="flex-1 border border-white/15 text-on-surface-variant font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:border-primary-container hover:text-primary-container transition-all">
+
+                <span class="material-symbols-outlined text-base leading-none">
+                  code
+                </span>
+
+                GitHub
+
+              </a>
+
+              <a href="#"
+                class="flex-1 border border-primary-container/40 text-primary-container font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-all">
+
+                <span class="material-symbols-outlined text-base leading-none">
+                  open_in_new
+                </span>
+
+                Live Demo
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- AI Chat Summariser -->
+        <div
+          class="glass-panel rounded-xl overflow-hidden group flex flex-col hover:shadow-[0_0_30px_rgba(0,245,255,0.08)] hover:-translate-y-1 transition-all duration-500">
+          <div class="h-48 bg-[#050816] relative overflow-hidden shrink-0">
+            <div
+              class="absolute inset-0 bg-primary-container/5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            </div>
+            <svg class="w-full h-full opacity-60 mix-blend-screen" viewBox="0 0 400 200"
+              xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="ai" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#00f5ff" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#050816" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="200" fill="#050816" />
+              <rect width="400" height="200" fill="url(#ai)" />
+              <!-- Neural nodes -->
+              <circle cx="100" cy="80" r="6" fill="#00f5ff" fill-opacity="0.8" />
+              <circle cx="200" cy="50" r="6" fill="#00f5ff" fill-opacity="0.7" />
+              <circle cx="300" cy="90" r="6" fill="#00f5ff" fill-opacity="0.8" />
+              <circle cx="150" cy="150" r="6" fill="#00f5ff" fill-opacity="0.6" />
+              <circle cx="250" cy="160" r="6" fill="#00f5ff" fill-opacity="0.7" />
+              <circle cx="200" cy="100" r="8" fill="#00f5ff" fill-opacity="1" />
+              <!-- Neural connections -->
+              <line x1="100" y1="80" x2="200" y2="100" stroke="#00f5ff" stroke-opacity="0.4" stroke-width="1.5" />
+              <line x1="200" y1="50" x2="200" y2="100" stroke="#00f5ff" stroke-opacity="0.4" stroke-width="1.5" />
+              <line x1="300" y1="90" x2="200" y2="100" stroke="#00f5ff" stroke-opacity="0.4" stroke-width="1.5" />
+              <line x1="150" y1="150" x2="200" y2="100" stroke="#00f5ff" stroke-opacity="0.3" stroke-width="1.5" />
+              <line x1="250" y1="160" x2="200" y2="100" stroke="#00f5ff" stroke-opacity="0.3" stroke-width="1.5" />
+              <!-- Pulses -->
+              <circle cx="200" cy="100" r="12" fill="none" stroke="#00f5ff" stroke-opacity="0.3" stroke-width="1"
+                stroke-dasharray="2,2" />
+              <circle cx="200" cy="100" r="18" fill="none" stroke="#00f5ff" stroke-opacity="0.15" stroke-width="1"
+                stroke-dasharray="2,2" />
+            </svg>
+            <div class="absolute top-4 right-4 z-20">
+              <span
+                class="px-2 py-1 bg-[#050816]/80 text-primary-container font-terminal-header text-[10px] rounded border border-primary-container/30 backdrop-blur-sm tracking-wider">NLP
+                PROJECT</span>
+            </div>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3
+              class="font-headline-lg text-2xl text-on-surface group-hover:text-primary-container transition-colors mb-2">
+              AI Chat Summariser</h3>
+            <p class="font-body-md text-on-surface-variant text-sm mb-6 leading-relaxed flex-grow">
+              Advanced NLP-powered tool for analyzing and summarizing AI conversations with emotion detection and
+              session passport generation using BART, go_emotions, and KeyBERT.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">FastAPI</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">PyTorch</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">BART</span>
+              <span
+                class="px-3 py-1 bg-white/5 text-secondary font-terminal-header text-[11px] rounded border border-white/10">Transformers</span>
+            </div>
+            <div class="flex gap-3">
+              <a href="https://github.com/KALITH2006/Claude_Chat_Summariser"
+                class="flex-1 border border-white/15 text-on-surface-variant font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:border-primary-container hover:text-primary-container transition-all">
+                <span class="material-symbols-outlined text-base leading-none">code</span> GitHub
+              </a>
+              <a href="#"
+                class="flex-1 border border-primary-container/40 text-primary-container font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-all">
+                <span class="material-symbols-outlined text-base leading-none">open_in_new</span> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ───────────────── INTERNSHIPS ───────────────── -->
+
+    <section id="experience" class="max-w-[1440px] mx-auto px-8 py-24 border-t border-white/5 reveal">
+
+      <!-- Heading -->
+
+      <div class="mb-14 flex items-center gap-4">
+
+        <span class="material-symbols-outlined text-primary-container text-3xl">
+          work_history
+        </span>
+
+        <h2 class="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+
+          Internships
+
+        </h2>
+
+      </div>
+
+      <!-- Timeline Wrapper -->
+
+      <div class="relative">
+
+        <!-- Vertical Timeline Line -->
+
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0
+      w-px bg-gradient-to-b
+      from-primary-container/30
+      via-primary-container/10
+      to-transparent">
+        </div>
+
+        <!-- ========================================= -->
+        <!-- ITEM 1 — CHENNAI PORT AUTHORITY -->
+        <!-- ========================================= -->
+
+        <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 group">
+
+          <!-- Timeline Dot -->
+          <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#050816]
+    border-2 border-primary-container md:-translate-x-1/2 mt-1 md:mt-0
+    timeline-dot z-10
+    group-hover:bg-primary-container
+    group-hover:shadow-[0_0_20px_rgba(0,245,255,0.5)]
+    transition-all duration-300">
+          </div>
+
+          <!-- LEFT SIDE -->
+          <div class="pl-12 md:pl-0 md:w-[45%] md:text-right order-1 md:order-1">
+
+            <span class="font-terminal-header text-xs text-primary-container tracking-widest">
+              02 July 2025 – 16 July 2025
+            </span>
+
+            <h3 class="font-headline-lg text-2xl text-on-surface mt-2 leading-snug">
+              Smart Automation Intern
+            </h3>
+
+            <p class="font-body-md text-on-surface-variant text-sm mt-2">
+              Chennai Port Authority
+            </p>
+
+            <p class="font-body-md text-primary-container text-sm mt-1">
+              On-Site Internship
+            </p>
+
+          </div>
+
+          <!-- RIGHT CARD -->
+          <div class="pl-12 md:pl-0 md:w-[45%] order-2 md:order-2">
+
+            <div class="glass-panel p-6 rounded-2xl
+      border border-primary-container/10
+      hover:border-primary-container/30
+      hover:shadow-[0_0_35px_rgba(0,245,255,0.08)]
+      transition-all duration-500">
+
+              <!-- Image -->
+              <div class="mb-5 overflow-hidden rounded-xl
+        border border-primary-container/20
+        relative group">
+
+                <div class="absolute inset-0 bg-primary-container/5 opacity-0
+          group-hover:opacity-100 transition-opacity duration-500 z-10">
+                </div>
+
+                <img src="chennai_port.png" alt="Chennai Port Authority" class="w-full h-56 object-cover
+          hover:scale-105 transition-transform duration-700" />
+
+              </div>
+
+              <!-- Description -->
+              <p class="font-body-md text-on-surface-variant text-sm mb-5 leading-relaxed">
+
+                Worked as a <span class="text-primary-container">Smart Automation Intern</span>
+                at Chennai Port Authority, contributing to intelligent maritime
+                automation and smart berth management systems.
+
+                Developed automation workflows and berth allocation solutions using
+                <span class="text-primary-container">Python</span>,
+                <span class="text-primary-container">SQL Server</span>,
+                and analytics tools to improve operational efficiency,
+                streamline vessel tracking,
+                and optimize port management processes.
+
+              </p>
+
+              <!-- Tech Stack -->
+              <div class="flex flex-wrap gap-2 mb-6">
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  Python
+                </span>
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  SQL Server
+                </span>
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  CustomTkinter
+                </span>
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  PyODBC
+                </span>
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  Pandas
+                </span>
+
+                <span class="px-3 py-1 bg-white/5 border border-white/10
+        text-primary-container font-terminal-header text-[11px] rounded">
+                  Excel Automation
+                </span>
+
+              </div>
+
+              <!-- Certificate Button -->
+              <a href="https://drive.google.com/file/d/1TA5Zrk7wwQIguOa-7YkE8zhfVYtme6uM/view?usp=sharing"
+                target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-full
+        border border-primary-container/40
+        text-primary-container font-terminal-header text-sm
+        hover:bg-primary-container
+        hover:text-[#050816]
+        hover:shadow-[0_0_25px_rgba(0,245,255,0.35)]
+        transition-all duration-300 group">
+
+                <span>View Certificate</span>
+
+                <span class="material-symbols-outlined text-lg
+          group-hover:translate-x-1
+          group-hover:-translate-y-1
+          transition-transform">
+                  open_in_new
+                </span>
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+        <!-- ========================================= -->
+        <!-- ITEM 2 — AI DOCTOR FOR MEDFITS -->
+        <!-- ========================================= -->
+
+        <div
+          class="relative flex flex-col md:flex-row-reverse items-start md:items-center justify-between gap-6 group mt-16">
+
+          <!-- Timeline dot -->
+
+          <div
+            class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#050816] border-2 border-secondary md:-translate-x-1/2 mt-1 md:mt-0 z-10 group-hover:bg-secondary group-hover:shadow-[0_0_20px_rgba(123,208,255,0.5)] transition-all duration-300">
+          </div>
+
+          <!-- Left text -->
+
+          <div class="pl-12 md:pl-0 md:w-[45%] order-1">
+
+            <span class="font-terminal-header text-xs text-secondary tracking-widest">
+              AI HEALTHCARE PROJECT
+            </span>
+
+            <h3 class="font-headline-lg text-xl text-on-surface mt-1 leading-snug">
+              AI Doctor Assistant
+            </h3>
+
+            <p class="font-body-md text-on-surface-variant text-sm mt-1">
+              MedFits Healthcare Platform
+            </p>
+
+          </div>
+
+          <!-- Card -->
+
+          <div class="pl-12 md:pl-0 md:w-[45%] order-2">
+
+            <div class="glass-panel p-6 rounded-lg hover:shadow-[0_0_20px_rgba(123,208,255,0.08)] transition-shadow">
+
+              <!-- Project Image -->
+
+              <div class="mb-5 overflow-hidden rounded-lg border border-secondary/20">
+
+                <img src="medfits.jpg" alt="MedFits AI Doctor"
+                  class="w-full h-52 object-cover hover:scale-105 transition-transform duration-500" />
+
+              </div>
+
+              <!-- Description -->
+
+              <p class="font-body-md text-on-surface-variant text-sm mb-4 leading-relaxed">
+
+                Developed an intelligent AI Doctor Assistant for the MedFits healthcare platform to provide smart
+                symptom
+                analysis, health guidance, and AI-powered patient interaction experiences.
+                Focused on building scalable healthcare interfaces, conversational AI workflows, and secure backend
+                integrations for modern digital healthcare systems.
+
+              </p>
+
+              <!-- Tech Stack -->
+
+              <div class="flex flex-wrap gap-2">
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  Python
+                </span>
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  FastAPI
+                </span>
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  AI Chatbot
+                </span>
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  NLP
+                </span>
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  React
+                </span>
+
+                <span class="px-2 py-1 bg-white/5 text-outline font-terminal-header text-[10px] rounded">
+                  Healthcare AI
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ───────────────── EDUCATION & CERTIFICATIONS ───────────────── -->
+        <section id="education-certifications" class="max-w-[1440px] mx-auto px-8 py-24 border-t border-white/5 reveal">
+
+          <!-- Heading -->
+          <div class="mb-14 flex items-center gap-4">
+            <span class="material-symbols-outlined text-primary-container text-3xl">
+              school
+            </span>
+
+            <h2 class="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+              Education & Certifications
+            </h2>
+          </div>
+
+          <!-- Main Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- ===================================== -->
+            <!-- EDUCATION PANEL -->
+            <!-- ===================================== -->
+
+            <div
+              class="glass-panel rounded-xl p-8 border border-primary-container/10 hover:border-primary-container/30 transition-all duration-500 lg:col-span-1">
+
+              <!-- Badge -->
+              <div
+                class="inline-flex items-center gap-2 border border-primary-container/30 px-3 py-1 rounded bg-primary-container/10 mb-6">
+
+                <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+
+                <span class="font-terminal-header text-[11px] text-primary-container tracking-widest">
+                  EDUCATION
+                </span>
+
+              </div>
+
+              <!-- Institute -->
+              <h3 class="font-headline-lg text-2xl text-on-surface leading-snug mb-2">
+                B.S. Abdur Rahman Crescent Institute of Science and Technology
+              </h3>
+
+              <!-- Degree -->
+              <p class="font-terminal-header text-primary-container text-sm mb-4">
+                B.Tech in Artificial Intelligence and Data Science
+              </p>
+
+              <!-- Date -->
+              <div class="flex items-center gap-2 mb-6">
+                <span class="material-symbols-outlined text-secondary text-lg">
+                  calendar_month
+                </span>
+
+                <span class="text-on-surface-variant text-sm">
+                  Aug 2023 – June 2027 | Chennai, India
+                </span>
+              </div>
+
+              <!-- CGPA -->
+              <div class="bg-[#050816]/80 border border-primary-container/10 rounded-lg p-5 mb-6">
+
+                <div class="flex items-center justify-between">
+
+                  <span class="font-terminal-header text-outline text-xs tracking-widest">
+                    CURRENT_CGPA
+                  </span>
+
+                  <span class="font-display-xl text-3xl hero-name">
+                    7.00
+                  </span>
+
+                </div>
+
+              </div>
+
+              <!-- Major Subjects -->
+              <div>
+
+                <h4 class="font-terminal-header text-sm text-secondary mb-4 tracking-wider">
+                  MAJOR SUBJECTS
+                </h4>
+
+                <div class="flex flex-wrap gap-2">
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Machine Learning
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Deep Learning
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Data Structures
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Artificial Intelligence
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Data Mining
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    NLP
+                  </span>
+
+                  <span
+                    class="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-terminal-header text-outline">
+                    Python
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- CERTIFICATIONS -->
+            <!-- ===================================== -->
+
+            <div class="lg:col-span-2">
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- AWS -->
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">
+                      cloud
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      Coursera
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      AWS Project Network
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      Cloud & Project Infrastructure
+                    </p>
+                  </div>
+
+                </div>
+
+                <!-- ML A-Z -->
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 transition-transform">
+                      psychology_alt
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      Udemy
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      Machine Learning A-Z
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      Machine Learning & AI Engineering
+                    </p>
+                  </div>
+
+                </div>
+
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-cyan-300 text-3xl group-hover:scale-110 transition-transform">
+                      analytics
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      Forage
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      GenAI Data Analytics
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      AI Analytics & Risk Profiling
+                    </p>
+                  </div>
+
+                </div>
+
+                <!-- Data Mining -->
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">
+                      dataset
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      Infosys
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      Data Mining in R
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      Data Analytics & Mining
+                    </p>
+                  </div>
+
+                </div>
+
+                <!-- Business Intelligence -->
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">
+                      monitoring
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      Infosys
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      Business Intelligence
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      Data Visualization & Decision Intelligence
+                    </p>
+                  </div>
+
+                </div>
+                <div
+                  class="cert-badge p-6 rounded-lg flex flex-col gap-4 hover:-translate-y-1 transition-all duration-300 group">
+
+                  <div class="flex items-start justify-between">
+
+                    <span
+                      class="material-symbols-outlined text-green-300 text-3xl group-hover:scale-110 transition-transform">
+                      database
+                    </span>
+
+                    <span
+                      class="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded">
+                      HackerRank
+                    </span>
+
+                  </div>
+
+                  <div>
+                    <h4
+                      class="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-1">
+                      SQL (Basic)
+                    </h4>
+
+                    <p class="font-body-sm text-outline text-xs">
+                      SQL Queries & Relational Databases
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ─── CONTACT ─── -->
+        <section id="contact" class="max-w-[1440px] mx-auto px-8 py-24 border-t border-white/5 reveal">
+          <div class="mb-12 flex items-center gap-4">
+            <span class="material-symbols-outlined text-primary-container text-3xl">terminal</span>
+            <h2 class="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+              Let's Connect
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+            <!-- Left — Status -->
+            <div class="flex flex-col gap-8">
+              <div class="glass-panel p-6 rounded-lg">
+                <h3
+                  class="font-terminal-header text-sm text-on-surface mb-6 border-b border-white/10 pb-3 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+                  SYSTEM.STATUS
+                </h3>
+                <div class="space-y-4 font-terminal-header text-sm">
+                  <div class="flex justify-between items-center group">
+                    <span class="text-outline group-hover:text-primary-container transition-colors">&gt;
+                      NAME:</span>
+                    <span class="text-primary-container">Mohamed Kalith K</span>
+                  </div>
+                  <div class="flex justify-between items-center group">
+                    <span class="text-outline group-hover:text-primary-container transition-colors">&gt; EMAIL:</span>
+                    <a href="mailto:mohamedkalith687@gmail.com"
+                      class="text-secondary hover:text-primary-container transition-colors text-xs">mohamedkalith687@gmail.com</a>
+                  </div>
+
+
+                  <div class="flex justify-between items-center group">
+                    <span class="text-outline group-hover:text-primary-container transition-colors">&gt;
+                      CONTACT NO:</span>
+                    <span class="text-primary-container">+917639834962</span>
+                  </div>
+                  <div class="flex justify-between items-center group">
+                    <span class="text-outline group-hover:text-primary-container transition-colors">&gt;
+                      AVAILABILITY:</span>
+                    <span class="text-tertiary-container text-xs">OPEN_TO_OPPORTUNITIES</span>
+                  </div>
+                  <div class="flex justify-between items-center group">
+                    <span class="text-outline group-hover:text-primary-container transition-colors">&gt;
+                      LOCATION:</span>
+                    <span class="text-on-surface-variant">Chennai,Tamil Nadu,India</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Social Links -->
+              <div class="flex gap-4">
+                <a href="https://www.linkedin.com/in/mohamed-kalith-"
+                  class="w-12 h-12 rounded bg-[#050816] border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container hover:shadow-[0_0_15px_rgba(0,245,255,0.3)] transition-all"
+                  title="LinkedIn">
+                  <span class="material-symbols-outlined text-xl">link</span>
+                </a>
+                <a href="https://github.com/KALITH2006"
+                  class="w-12 h-12 rounded bg-[#050816] border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container hover:shadow-[0_0_15px_rgba(0,245,255,0.3)] transition-all"
+                  title="GitHub">
+                  <span class="material-symbols-outlined text-xl">code</span>
+                </a>
+                <a href="mailto:mohamedkalith687@gmail.com"
+                  class="w-12 h-12 rounded bg-[#050816] border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container hover:shadow-[0_0_15px_rgba(0,245,255,0.3)] transition-all"
+                  title="Email">
+                  <span class="material-symbols-outlined text-xl">mail</span>
+                </a>
+              </div>
+
+              <!-- Info card -->
+              <div class="glass-panel p-6 rounded-lg border-l-2 border-primary-container/40">
+                <p class="font-body-sm text-on-surface-variant text-sm leading-relaxed">
+                  Open to <span class="text-primary-container">AI/ML engineering</span>, <span
+                    class="text-secondary">full-stack development</span>, and <span
+                    class="text-tertiary-container">cybersecurity</span> roles. Available for internships, freelance,
+                  and
+                  full-time opportunities.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right — Contact Form -->
+            <div class="glass-panel p-8 rounded-lg relative overflow-hidden">
+              <div class="absolute inset-0 opacity-40 pointer-events-none"
+                style="background:linear-gradient(138deg,rgba(0,245,255,0.05) 0%,transparent 100%)"></div>
+
+              <div class="relative z-10 flex flex-col gap-6">
+                <!-- Name -->
+                <div class="flex flex-col gap-2">
+                  <label class="font-terminal-header text-[11px] text-outline uppercase tracking-widest" for="c-name">ID
+                    /
+                    Name</label>
+                  <input id="c-name" type="text" placeholder="Enter identification..."
+                    class="form-input bg-[#050816]/80 border border-white/10 rounded px-4 py-3 text-on-surface font-body-sm text-sm placeholder-[#6b7280] transition-all w-full" />
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col gap-2">
+                  <label class="font-terminal-header text-[11px] text-outline uppercase tracking-widest"
+                    for="c-email">Comms
+                    Link / Email</label>
+                  <input id="c-email" type="email" placeholder="Enter secure channel..."
+                    class="form-input bg-[#050816]/80 border border-white/10 rounded px-4 py-3 text-on-surface font-body-sm text-sm placeholder-[#6b7280] transition-all w-full" />
+                </div>
+
+                <!-- Phone -->
+                <div class="flex flex-col gap-2">
+                  <label class="font-terminal-header text-[11px] text-outline uppercase tracking-widest"
+                    for="c-phone">Phone</label>
+                  <input id="c-phone" type="tel" placeholder="Enter comm frequency..."
+                    class="form-input bg-[#050816]/80 border border-white/10 rounded px-4 py-3 text-on-surface font-body-sm text-sm placeholder-[#6b7280] transition-all w-full" />
+                </div>
+
+                <!-- Submit -->
+                <button id="send-btn" onclick="submitForm()"
+                  class="mt-2 bg-primary-container/10 border border-primary-container text-primary-container font-terminal-header text-sm py-4 rounded flex items-center justify-center gap-2 group hover:bg-primary-container hover:text-[#0e131f] hover:shadow-[0_0_25px_rgba(0,245,255,0.35)] transition-all duration-300">
+                  <span class="material-symbols-outlined text-lg leading-none" id="send-icon">send</span>
+                  <span id="send-label">Send Message</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════ FOOTER ══ -->
+  <footer
+    class="w-full py-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#080e1a] border-t border-outline-variant z-10 relative">
+    <div
+      class="font-terminal-header text-xs text-on-surface hover:text-primary-container transition-colors cursor-default">
+      © 2024 KALITH_AI // ENGINEER PORTFOLIO v2.0
+    </div>
+    <div class="flex gap-6 font-terminal-header text-xs">
+      <a href="#"
+        class="text-outline hover:text-primary-container opacity-80 hover:opacity-100 transition-all">Architecture</a>
+      <a href="#"
+        class="text-outline hover:text-primary-container opacity-80 hover:opacity-100 transition-all">Source</a>
+      <a href="#"
+        class="text-outline hover:text-primary-container opacity-80 hover:opacity-100 transition-all">Security</a>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ TOAST ══ -->
+  <div id="toast"></div>
+
+  <!-- ═══════════════════════════════════════ SCRIPTS ══ -->
+  <script>
+    // ── GOOGLE APPS SCRIPT URL ──────────────────────────────────────────────────
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_XPYARsBj4dkIqHAlyXFI2f6akZtIuFUP2pkT0m2Zi2MYfxDbu9CjWKt86pABPP7k/exec";
+
+    // ── CONTACT FORM SUBMIT ─────────────────────────────────────────────────────
+    // Uses an <img> ping — the only method that reliably bypasses Google's
+    // login-redirect when the script is opened from a local file:// origin.
+    // The img src fires the GET request; onerror fires because Google returns
+    // a redirect (not an image), but the Apps Script has already executed.
+    function submitForm() {
+      const name = document.getElementById("c-name").value.trim();
+      const email = document.getElementById("c-email").value.trim();
+      const phone = document.getElementById("c-phone").value.trim();
+
+      if (!name || !email) {
+        showToast("⚠ Please enter your name and email.", "error");
+        return;
+      }
+
+      const btn = document.getElementById("send-btn");
+      const icon = document.getElementById("send-icon");
+      const label = document.getElementById("send-label");
+
+      btn.disabled = true;
+      icon.textContent = "hourglass_empty";
+      label.textContent = "Transmitting...";
+
+      const url = SCRIPT_URL + "?" + new URLSearchParams({ name, email, phone });
+
+      // img ping — works from file:// and any origin; Apps Script runs on load
+      const img = new Image();
+      img.onload = img.onerror = function () {
+        showToast("✓ Message transmitted successfully!", "success");
+        document.getElementById("c-name").value = "";
+        document.getElementById("c-email").value = "";
+        document.getElementById("c-phone").value = "";
+        icon.textContent = "check_circle";
+        label.textContent = "Transmitted!";
+        setTimeout(() => {
+          btn.disabled = false;
+          icon.textContent = "send";
+          label.textContent = "Send Message";
+        }, 3000);
+      };
+      img.src = url;
+    }
+
+    function showToast(msg, type) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.className = "show " + type;
+      setTimeout(() => { t.className = ""; }, 4000);
+    }
+
+
+    // ── PARTICLES ───────────────────────────────────────────────────────────────
+    (function spawnParticles() {
+      const container = document.getElementById("particles");
+      for (let i = 0; i < 55; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const s = Math.random() * 3 + 1;
+        p.style.cssText = `
+      width:${s}px; height:${s}px;
+      left:${Math.random() * 100}vw;
+      top:${Math.random() * 100}vh;
+      animation: drift ${Math.random() * 18 + 10}s ease-in-out ${Math.random() * 6}s infinite alternate;
+    `;
+        container.appendChild(p);
+      }
+      const st = document.createElement("style");
+      st.textContent = `@keyframes drift{0%{transform:translateY(0) translateX(0);opacity:.15}50%{opacity:.65}100%{transform:translateY(-90px) translateX(18px);opacity:.15}}`;
+      document.head.appendChild(st);
+    })();
+
+    // ── GLASS PANEL MOUSE GLOW ──────────────────────────────────────────────────
+    document.querySelectorAll(".glass-panel").forEach(p => {
+      p.addEventListener("mousemove", e => {
+        const r = p.getBoundingClientRect();
+        p.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        p.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    });
+
+    // ── SCROLL REVEAL ────────────────────────────────────────────────────────────
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObs.observe(el));
+
+    // ── SKILL BAR ANIMATION ──────────────────────────────────────────────────────
+    const skillObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll(".skill-bar").forEach(bar => bar.classList.add("animate"));
+          skillObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const skillsGrid = document.getElementById("skills-grid");
+    if (skillsGrid) skillObs.observe(skillsGrid);
+
+    // ── ACTIVE NAV ───────────────────────────────────────────────────────────────
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove("active"));
+          const active = document.querySelector(`.nav-link[data-section="${e.target.id}"]`);
+          if (active) active.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+
+    sections.forEach(s => navObs.observe(s));
+
+    // ── MOBILE MENU ──────────────────────────────────────────────────────────────
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobile-menu");
+    let menuOpen = false;
+
+    hamburger.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle("open", menuOpen);
+      document.getElementById("h1").style.transform = menuOpen ? "rotate(45deg) translate(5px,5px)" : "";
+      document.getElementById("h2").style.opacity = menuOpen ? "0" : "1";
+      document.getElementById("h3").style.transform = menuOpen ? "rotate(-45deg) translate(4px,-4px)" : "";
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove("open");
+      document.getElementById("h1").style.transform = "";
+      document.getElementById("h2").style.opacity = "1";
+      document.getElementById("h3").style.transform = "";
+    }
+
+    // ── SMOOTH SCROLL ─────────────────────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", e => {
+        const target = document.querySelector(a.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    /* ── TYPING TEXT ───────────────────────────────────────────────────────────────*/
+    const words = [
+      "AI Engineer",
+      "Cybersecurity Enthusiast",
+      "Full Stack Developer",
+      "ML Builder"
+    ];
+
+    let wordIndex = 0;
+    let charIndex = 0;
+
+    const typing = document.querySelector(".typing-text");
+
+    function type() {
+      if (charIndex < words[wordIndex].length) {
+        typing.innerHTML += words[wordIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typing.innerHTML = words[wordIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        wordIndex++;
+        if (wordIndex >= words.length) {
+          wordIndex = 0;
+        }
+        setTimeout(type, 300);
+      }
+    }
+
+    type();
+  </script>
+</body>
+
+</html>
