@@ -3,7 +3,7 @@ import { goTo } from "../nav.js";
 import { useWordRotator } from "../hooks.js";
 
 const btnPrimary =
-  "bg-primary-container text-[#0e131f] font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] hover:scale-105 transition-all duration-300";
+  "bg-primary-container text-[#111111] font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:shadow-[0_0_30px_rgba(255,49,49,0.5)] hover:scale-105 transition-all duration-300";
 const btnGhost =
   "border border-outline text-secondary font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:border-primary-container hover:text-primary-container hover:bg-primary-container/5 hover:scale-105 transition-all duration-300";
 
@@ -15,9 +15,9 @@ function NeuralNet() {
       xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="holo" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stopColor="#00f5ff" stopOpacity="0.8" />
-          <stop offset="60%" stopColor="#7bd0ff" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+          <stop offset="0%" stopColor="#ff3131" stopOpacity="0.8" />
+          <stop offset="60%" stopColor="#b2aeab" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#ff3131" stopOpacity="0" />
         </radialGradient>
         <filter id="glow-f">
           <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -27,7 +27,7 @@ function NeuralNet() {
           </feMerge>
         </filter>
       </defs>
-      <g stroke="#00f5ff" strokeOpacity="0.2" strokeWidth="0.5">
+      <g stroke="#ff3131" strokeOpacity="0.2" strokeWidth="0.5">
         <line x1="110" y1="50" x2="60" y2="120" />
         <line x1="110" y1="50" x2="160" y2="120" />
         <line x1="60" y1="120" x2="40" y2="200" />
@@ -38,24 +38,24 @@ function NeuralNet() {
         <line x1="180" y1="200" x2="110" y2="260" />
         <line x1="110" y1="200" x2="110" y2="260" />
       </g>
-      <g stroke="#00f5ff" strokeOpacity="0.5" strokeWidth="0.8" filter="url(#glow-f)">
+      <g stroke="#ff3131" strokeOpacity="0.5" strokeWidth="0.8" filter="url(#glow-f)">
         <line x1="110" y1="50" x2="110" y2="200" />
         <line x1="60" y1="120" x2="180" y2="200" />
       </g>
       <g filter="url(#glow-f)">
-        <circle cx="110" cy="50" r="6" fill="#00f5ff" fillOpacity="0.9" />
-        <circle cx="60" cy="120" r="5" fill="#00f5ff" fillOpacity="0.7" />
-        <circle cx="160" cy="120" r="5" fill="#7bd0ff" fillOpacity="0.7" />
-        <circle cx="40" cy="200" r="4" fill="#00f5ff" fillOpacity="0.6" />
-        <circle cx="110" cy="200" r="6" fill="#00f5ff" fillOpacity="0.9" />
-        <circle cx="180" cy="200" r="4" fill="#7bd0ff" fillOpacity="0.6" />
-        <circle cx="110" cy="260" r="7" fill="#00f5ff" fillOpacity="1" />
+        <circle cx="110" cy="50" r="6" fill="#ff3131" fillOpacity="0.9" />
+        <circle cx="60" cy="120" r="5" fill="#ff3131" fillOpacity="0.7" />
+        <circle cx="160" cy="120" r="5" fill="#b2aeab" fillOpacity="0.7" />
+        <circle cx="40" cy="200" r="4" fill="#ff3131" fillOpacity="0.6" />
+        <circle cx="110" cy="200" r="6" fill="#ff3131" fillOpacity="0.9" />
+        <circle cx="180" cy="200" r="4" fill="#b2aeab" fillOpacity="0.6" />
+        <circle cx="110" cy="260" r="7" fill="#ff3131" fillOpacity="1" />
       </g>
-      <circle cx="110" cy="50" r="12" fill="none" stroke="#00f5ff" strokeOpacity="0.2" strokeWidth="1">
+      <circle cx="110" cy="50" r="12" fill="none" stroke="#ff3131" strokeOpacity="0.2" strokeWidth="1">
         <animate attributeName="r" values="8;20;8" dur="3s" repeatCount="indefinite" />
         <animate attributeName="stroke-opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" />
       </circle>
-      <circle cx="110" cy="260" r="14" fill="none" stroke="#00f5ff" strokeOpacity="0.3" strokeWidth="1">
+      <circle cx="110" cy="260" r="14" fill="none" stroke="#ff3131" strokeOpacity="0.3" strokeWidth="1">
         <animate attributeName="r" values="10;24;10" dur="3s" begin="1.5s" repeatCount="indefinite" />
         <animate attributeName="stroke-opacity" values="0.5;0;0.5" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </circle>
@@ -127,13 +127,13 @@ export default function Hero() {
           </div>
           <div className="flex gap-2">
             <span className="w-3 h-3 rounded-full bg-error-container cursor-pointer hover:shadow-[0_0_10px_#93000a] transition-shadow" />
-            <span className="w-3 h-3 rounded-full bg-tertiary-container cursor-pointer hover:shadow-[0_0_10px_#ffdb3f] transition-shadow" />
-            <span className="w-3 h-3 rounded-full bg-primary-container cursor-pointer hover:shadow-[0_0_10px_#00f5ff] transition-shadow" />
+            <span className="w-3 h-3 rounded-full bg-tertiary-container cursor-pointer hover:shadow-[0_0_10px_#e4dfd9] transition-shadow" />
+            <span className="w-3 h-3 rounded-full bg-primary-container cursor-pointer hover:shadow-[0_0_10px_#ff3131] transition-shadow" />
           </div>
         </div>
 
         <div className="flex-grow grid grid-cols-2 gap-4 min-h-0">
-          <div className="bg-[#050816]/80 p-4 rounded border border-white/5 flex flex-col gap-2 overflow-hidden hover:bg-[#050816] transition-colors duration-300">
+          <div className="bg-[#0a0a0a]/80 p-4 rounded border border-dashed border-white/10 flex flex-col gap-2 overflow-hidden hover:bg-[#0a0a0a] transition-colors duration-300">
             <span className="font-terminal-header text-xs text-outline tracking-widest mb-1">STATUS.INIT</span>
             {LOG.map(([k, v]) => (
               <div key={k} className="term-line font-terminal-header text-xs text-secondary leading-5">
@@ -145,7 +145,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="bg-[#050816]/80 rounded border border-white/5 relative overflow-hidden flex items-center justify-center group hover:bg-[#050816] transition-colors duration-300">
+          <div className="bg-[#0a0a0a]/80 rounded border border-dashed border-white/10 relative overflow-hidden flex items-center justify-center group hover:bg-[#0a0a0a] transition-colors duration-300">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-primary-container/5 z-10 pointer-events-none" />
             <NeuralNet />
           </div>

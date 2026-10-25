@@ -41,6 +41,7 @@ export default function App() {
   return (
     <>
       <Background />
+      <div className="crt-overlay" aria-hidden="true" />
       <Navbar active={active} />
 
       <main className="flex-grow z-10 relative mt-[69px]">
@@ -52,7 +53,7 @@ export default function App() {
         <Contact notify={notify} />
       </main>
 
-      <footer className="w-full py-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#080e1a] border-t border-outline-variant z-10 relative">
+      <footer className="w-full py-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#0a0a0a] border-t border-outline-variant z-10 relative">
         <div className="font-terminal-header text-xs text-on-surface hover:text-primary-container transition-colors cursor-default">
           © 2026 KALITH_AI // ENGINEER PORTFOLIO v2.0
         </div>

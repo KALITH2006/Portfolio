@@ -80,8 +80,8 @@ const INTERNSHIPS = [
 function Card({ item, accent }) {
   const ring = accent === "secondary" ? "border-secondary/20" : "border-primary-container/20";
   return (
-    <div className="glass-panel p-6 rounded-2xl border border-primary-container/10 hover:border-primary-container/30 hover:shadow-[0_0_35px_rgba(0,245,255,0.08)] transition-all duration-500">
-      <div className={`mb-5 overflow-hidden rounded-xl border ${ring} relative group ${item.imageBg ?? "bg-[#050816]"}`}>
+    <div className="glass-panel p-6 rounded-2xl border border-primary-container/10 hover:border-primary-container/30 hover:shadow-[0_0_35px_rgba(255,49,49,0.08)] transition-all duration-500">
+      <div className={`mb-5 overflow-hidden rounded-xl border ${ring} relative group ${item.imageBg ?? "bg-[#0a0a0a]"}`}>
         <div className="absolute inset-0 bg-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
         <img
           src={item.image}
@@ -109,7 +109,7 @@ function Card({ item, accent }) {
         href={item.certificate}
         target="_blank"
         rel="noreferrer"
-        className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-container/40 text-primary-container font-terminal-header text-sm hover:bg-primary-container hover:text-[#050816] hover:shadow-[0_0_25px_rgba(0,245,255,0.35)] transition-all duration-300">
+        className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-container/40 text-primary-container font-terminal-header text-sm hover:bg-primary-container hover:text-[#0a0a0a] hover:shadow-[0_0_25px_rgba(255,49,49,0.35)] transition-all duration-300">
         <span>View Certificate</span>
         <span className="material-symbols-outlined text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
           open_in_new
@@ -121,7 +121,7 @@ function Card({ item, accent }) {
 
 export default function Experience() {
   return (
-    <Section id="experience" className="border-t border-white/5">
+    <Section id="experience" className="border-t border-dashed border-white/10">
       <SectionHeading icon="work_history" className="mb-14">
         Internships
       </SectionHeading>
@@ -137,7 +137,7 @@ export default function Experience() {
               className={`relative flex flex-col ${
                 flip ? "md:flex-row-reverse" : "md:flex-row"
               } items-start md:items-center justify-between gap-6 group ${i ? "mt-16" : ""}`}>
-              <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#050816] border-2 border-primary-container md:-translate-x-1/2 mt-1 md:mt-0 timeline-dot z-10 group-hover:bg-primary-container group-hover:shadow-[0_0_20px_rgba(0,245,255,0.5)] transition-all duration-300" />
+              <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-primary-container md:-translate-x-1/2 mt-1 md:mt-0 timeline-dot z-10 group-hover:bg-primary-container group-hover:shadow-[0_0_20px_rgba(255,49,49,0.5)] transition-all duration-300" />
 
               <div className={`pl-12 md:pl-0 md:w-[45%] order-1 ${flip ? "" : "md:text-right"}`}>
                 <span className="font-terminal-header text-xs text-primary-container tracking-widest">

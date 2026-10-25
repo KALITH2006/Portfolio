@@ -19,9 +19,9 @@ const ICON_PATHS = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const socialBtn =
-  "w-12 h-12 rounded bg-[#050816] border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container hover:shadow-[0_0_15px_rgba(0,245,255,0.3)] transition-all";
+  "w-12 h-12 rounded bg-[#0a0a0a] border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container hover:shadow-[0_0_15px_rgba(255,49,49,0.3)] transition-all";
 const inputCls =
-  "form-input bg-[#050816]/80 border border-white/10 rounded px-4 py-3 text-on-surface font-body-sm text-sm placeholder-[#6b7280] transition-all w-full";
+  "form-input bg-[#0a0a0a]/80 border border-white/10 rounded px-4 py-3 text-on-surface font-body-sm text-sm placeholder-[#6f6c68] transition-all w-full";
 const labelCls = "font-terminal-header text-[11px] text-outline uppercase tracking-widest";
 
 const link = "hover:text-primary-container transition-colors break-all";
@@ -112,7 +112,7 @@ export default function Contact({ notify }) {
   const label = sending ? "Transmitting..." : status === "sent" ? "Transmitted!" : "Send Message";
 
   return (
-    <Section id="contact" className="border-t border-white/5">
+    <Section id="contact" className="border-t border-dashed border-white/10">
       <SectionHeading icon="terminal">Let's Connect</SectionHeading>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -160,7 +160,7 @@ export default function Contact({ notify }) {
         <form onSubmit={submit} noValidate className="glass-panel p-8 rounded-lg relative overflow-hidden">
           <div
             className="absolute inset-0 opacity-40 pointer-events-none"
-            style={{ background: "linear-gradient(138deg,rgba(0,245,255,0.05) 0%,transparent 100%)" }}
+            style={{ background: "linear-gradient(138deg,rgba(255,49,49,0.05) 0%,transparent 100%)" }}
           />
           <div className="relative z-10 flex flex-col gap-6">
             <div className="flex flex-col gap-2">
@@ -208,7 +208,7 @@ export default function Contact({ notify }) {
             <button
               type="submit"
               disabled={sending || status === "sent"}
-              className="mt-2 bg-primary-container/10 border border-primary-container text-primary-container font-terminal-header text-sm py-4 rounded flex items-center justify-center gap-2 hover:bg-primary-container hover:text-[#0e131f] hover:shadow-[0_0_25px_rgba(0,245,255,0.35)] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300">
+              className="mt-2 bg-primary-container/10 border border-primary-container text-primary-container font-terminal-header text-sm py-4 rounded flex items-center justify-center gap-2 hover:bg-primary-container hover:text-[#111111] hover:shadow-[0_0_25px_rgba(255,49,49,0.35)] disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300">
               <span className="material-symbols-outlined text-lg leading-none">{icon}</span>
               <span>{label}</span>
             </button>

@@ -20,7 +20,7 @@ export default function Background() {
       <div className="fixed inset-0 cyber-grid pointer-events-none z-0" />
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-20"
-        style={{ background: "radial-gradient(circle at 80% 20%,#8B5CF6 0%,transparent 40%)" }}
+        style={{ background: "radial-gradient(circle at 80% 20%,#ff3131 0%,transparent 40%)" }}
       />
       <div className="fixed inset-0 pointer-events-none z-0">
         {particles.map((p, i) => (

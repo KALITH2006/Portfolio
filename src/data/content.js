@@ -55,7 +55,7 @@ export const PROJECTS = [
     description:
       "Advanced NLP-powered tool for analyzing and summarizing AI conversations with emotion detection and session passport generation using BART, go_emotions, and KeyBERT.",
     tech: ["FastAPI", "PyTorch", "BART", "Transformers"],
-    github: "https://github.com/KALITH2006/Claude_Chat_Summariser",
+    github: "https://github.com/KALITH2006/AI_Chat_Summariser",
     demo: null,
   },
 ];

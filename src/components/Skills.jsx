@@ -12,7 +12,7 @@ export default function Skills() {
           <div
             key={s.name}
             className="glass-panel p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 flex flex-col items-center gap-4 cursor-pointer">
-            <div className="w-16 h-16 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+            <div className="w-16 h-16 rounded-full bg-[#0a0a0a] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(255,49,49,0.35)] transition-all duration-300">
               <span className="material-symbols-outlined text-primary-container text-3xl group-hover:scale-110 transition-transform">
                 {s.icon}
               </span>

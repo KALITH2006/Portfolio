@@ -4,15 +4,15 @@ import { Section, SectionHeading } from "./Section.jsx";
 
 const DOT = {
   "AI & ML": "bg-primary-container",
-  "Generative AI": "bg-violet-500",
+  "Generative AI": "bg-[#ece9e1]",
   "Data & Analytics": "bg-tertiary-container",
-  "Programming & Cloud": "bg-emerald-400",
+  "Programming & Cloud": "bg-[#ff7a7a]",
 };
 const TEXT = {
   "AI & ML": "text-primary-container",
-  "Generative AI": "text-violet-400",
+  "Generative AI": "text-[#ece9e1]",
   "Data & Analytics": "text-tertiary-container",
-  "Programming & Cloud": "text-emerald-300",
+  "Programming & Cloud": "text-[#ff7a7a]",
 };
 
 // Brand logo (public/logos) where one exists, otherwise a Material icon.
@@ -36,7 +36,7 @@ function IssuerLogo({ c }) {
   const icon = ICONS.find(([re]) => re.test(hay))?.[1];
   const logo = !icon && LOGOS.find(([re]) => re.test(hay))?.[1];
   return (
-    <div className="w-12 h-12 shrink-0 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+    <div className="w-12 h-12 shrink-0 rounded-full bg-[#0a0a0a] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(255,49,49,0.35)] transition-all duration-300">
       {logo ? (
         <img src={`/logos/${logo}.svg`} alt="" className="w-6 h-6 group-hover:scale-110 transition-transform" />
       ) : (
@@ -57,7 +57,7 @@ function Pill({ active, onClick, children, count }) {
       onClick={onClick}
       className={`px-4 py-2 rounded border font-terminal-header text-xs tracking-wider whitespace-nowrap transition-all duration-300 ${
         active
-          ? "bg-primary-container text-[#0e131f] border-primary-container shadow-[0_0_20px_rgba(0,245,255,0.35)]"
+          ? "bg-primary-container text-[#111111] border-primary-container shadow-[0_0_20px_rgba(255,49,49,0.35)]"
           : "border-white/15 text-on-surface-variant hover:border-primary-container hover:text-primary-container"
       }`}>
       {children} <sup className="text-[10px] opacity-70">{count}</sup>
@@ -115,7 +115,7 @@ export default function Education() {
   const shown = CERTIFICATIONS.filter((c) => filter === "All" || c.category === filter);
 
   return (
-    <Section id="education-certifications" className="border-t border-white/5">
+    <Section id="education-certifications" className="border-t border-dashed border-white/10">
       <SectionHeading icon="school" className="mb-14">
         Education
       </SectionHeading>
@@ -138,7 +138,7 @@ export default function Education() {
           </div>
         </div>
         <div>
-          <div className="bg-[#050816]/80 border border-primary-container/10 rounded-lg p-5 mb-6">
+          <div className="bg-[#0a0a0a]/80 border border-primary-container/10 rounded-lg p-5 mb-6">
             <div className="flex items-center justify-between">
               <span className="font-terminal-header text-outline text-xs tracking-widest">CURRENT_CGPA</span>
               <span className="font-display-xl text-3xl hero-name">7.00</span>

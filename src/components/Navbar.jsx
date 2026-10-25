@@ -13,11 +13,11 @@ export default function Navbar({ active }) {
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: "rgba(14,19,31,0.6)",
+        background: "rgba(17,17,17,0.6)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "0 0 20px rgba(0,245,255,0.1)",
+        boxShadow: "0 0 20px rgba(255,49,49,0.1)",
       }}>
       <div className="max-w-[1440px] mx-auto px-8 flex items-center justify-between h-[69px]">
         <a href="/" onClick={(e) => go(e, "hero")}
@@ -38,7 +38,7 @@ export default function Navbar({ active }) {
         </div>
 
         <div className="flex items-center gap-4">
-          <a href="/contact" onClick={(e) => go(e, "contact")} className="bg-primary-container text-[#0e131f] font-terminal-header text-sm px-6 py-2 rounded uppercase hover:shadow-[0_0_25px_rgba(0,245,255,0.5)] hover:scale-105 transition-all duration-300 hidden md:block">
+          <a href="/contact" onClick={(e) => go(e, "contact")} className="bg-primary-container text-[#111111] font-terminal-header text-sm px-6 py-2 rounded uppercase hover:shadow-[0_0_25px_rgba(255,49,49,0.5)] hover:scale-105 transition-all duration-300 hidden md:block">
             CONNECT
           </a>
           <button
@@ -62,7 +62,7 @@ export default function Navbar({ active }) {
         </div>
       </div>
 
-      <div className={`mobile-menu md:hidden border-t border-white/5 ${open ? "open" : ""}`}>
+      <div className={`mobile-menu md:hidden border-t border-dashed border-white/10 ${open ? "open" : ""}`}>
         <div className="px-8 py-4 flex flex-col gap-4">
           {NAV_LINKS.map((l) => (
             <a
@@ -78,7 +78,7 @@ export default function Navbar({ active }) {
           <a
             href="/contact"
             onClick={(e) => go(e, "contact")}
-            className="bg-primary-container text-[#0e131f] font-terminal-header text-sm px-6 py-2 rounded uppercase text-center mt-2">
+            className="bg-primary-container text-[#111111] font-terminal-header text-sm px-6 py-2 rounded uppercase text-center mt-2">
             CONNECT
           </a>
         </div>
