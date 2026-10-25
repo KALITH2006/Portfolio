@@ -4,6 +4,7 @@ export default {
       theme: {
         extend: {
           colors: {
+            "ink-dim": "rgba(236,233,225,0.5)",
             "outline": "#8a8782",
             "on-primary": "#111111",
             "primary-fixed-dim": "#ff5a5a",

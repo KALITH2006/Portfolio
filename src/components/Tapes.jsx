@@ -1,81 +1,57 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { PROJECTS } from "../data/content.js";
-import { Chip } from "./Section.jsx";
 import { Visual } from "./Visual.jsx";
+import Overlay, { A, LinkRow, Tag } from "./Overlay.jsx";
 
-const linkBase =
-  "flex-1 font-terminal-header text-xs py-3 rounded flex items-center justify-center gap-2 transition-all uppercase tracking-widest";
-
-function Detail({ p, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
+function Tape({ p }) {
   return (
-    <div
-      className="absolute inset-0 z-[70] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 channel-in"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label={p.title}>
-      <div
-        className="glass-panel rounded-xl w-full max-w-3xl max-h-full overflow-y-auto no-scrollbar"
-        onClick={(e) => e.stopPropagation()}>
-        <div className="h-56 sm:h-72 bg-[#0a0a0a] relative overflow-hidden">
-          <Visual type={p.visual} title={p.title} />
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 z-20 px-3 py-1 bg-[#0a0a0a]/80 text-primary-container font-terminal-header text-[11px] rounded border border-primary-container/30 tracking-widest hover:bg-primary-container hover:text-[#111] transition-colors">
-            ESC ✕
-          </button>
-        </div>
-        <div className="p-6 sm:p-8">
-          <span className="font-terminal-header text-[11px] text-primary-container tracking-widest">{p.badge}</span>
-          <h3 className="font-headline-lg text-2xl sm:text-3xl text-on-surface mt-2 mb-3">{p.title}</h3>
-          <p className="font-body-md text-on-surface-variant text-sm leading-relaxed mb-6">{p.description}</p>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {p.tech.map((t) => (
-              <Chip key={t} className="text-secondary">
-                {t}
-              </Chip>
-            ))}
-          </div>
-          <div className="flex gap-3">
-            <a
-              href={p.github}
-              target="_blank"
-              rel="noreferrer"
-              className={`${linkBase} border border-white/15 text-on-surface-variant hover:border-primary-container hover:text-primary-container`}>
-              <span className="material-symbols-outlined text-base leading-none">code</span> GitHub
-            </a>
-            {p.demo ? (
-              <a
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                className={`${linkBase} border border-primary-container/40 text-primary-container hover:bg-primary-container/10`}>
-                <span className="material-symbols-outlined text-base leading-none">open_in_new</span> Live Demo
-              </a>
-            ) : (
-              <span className={`${linkBase} border border-white/10 text-outline cursor-not-allowed`}>
-                <span className="material-symbols-outlined text-base leading-none">schedule</span> Coming Soon
-              </span>
-            )}
-          </div>
-        </div>
+    <div className="tape-face" style={{ "--tone": p.tone }}>
+      <div className="tape-label">Project Video</div>
+      <div className="tape-frame">
+        <Visual type={p.visual} title={p.title} />
+      </div>
+      <div className="tape-title">
+        {p.short.map((w) => (
+          <div key={w}>{w}</div>
+        ))}
+      </div>
+      <div className="tape-foot">
+        <span className="tape-badge">VHS</span>
+        <span className="serif" style={{ fontSize: "8cqw" }}>
+          {p.year}
+        </span>
+        <span className="logo-band" style={{ background: p.tone, height: "0.6em", width: "1.2em" }} />
       </div>
     </div>
   );
 }
 
-// Projects as a row of "tapes": arrow keys move, Enter opens the centred one.
+function Detail({ p, onClose }) {
+  return (
+    <Overlay label={p.title} onClose={onClose}>
+      <span className="px text-primary-container">[{p.badge}]</span>
+      <h2 className="serif text-4xl sm:text-5xl text-on-surface mt-2 leading-[0.95]">{p.title}</h2>
+      <p className="px !text-lg text-on-surface-variant mt-4 normal-case tracking-normal !leading-snug">{p.description}</p>
+      <div className="flex flex-wrap gap-2 mt-5">
+        {p.tech.map((t) => (
+          <Tag key={t}>{t}</Tag>
+        ))}
+      </div>
+      <LinkRow>
+        <A href={p.github}>GitHub</A>
+        {p.demo ? <A href={p.demo}>Live demo</A> : <span className="text-ink-dim">Live demo — coming soon</span>}
+      </LinkRow>
+    </Overlay>
+  );
+}
+
+// Projects as VHS tapes: arrows move, Enter opens the centred one.
 export default function Tapes({ active }) {
   const [i, setI] = useState(0);
   const [open, setOpen] = useState(false);
   const n = PROJECTS.length;
   const go = useCallback((d) => setI((v) => (v + d + n) % n), [n]);
+  const drag = useRef(null);
 
   useEffect(() => {
     if (!active || open) return;
@@ -91,59 +67,54 @@ export default function Tapes({ active }) {
   const p = PROJECTS[i];
 
   return (
-    <section id="projects" className="max-w-[1440px] mx-auto px-8 py-16 border-t border-dashed border-white/10">
-      <div className="flex items-center justify-between mb-8 font-terminal-header text-xs tracking-widest uppercase">
-        <span className="text-on-surface">
-          Projects <span className="text-outline">[{String(i + 1).padStart(2, "0")}/{String(n).padStart(2, "0")}]</span>
-        </span>
-        <span className="hidden sm:block text-outline">← → to browse · Enter to open</span>
-      </div>
+    <div
+      className="absolute inset-0"
+      onPointerDown={(e) => (drag.current = e.clientX)}
+      onPointerUp={(e) => {
+        if (drag.current == null) return;
+        const dx = e.clientX - drag.current;
+        drag.current = null;
+        if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+      }}>
+      <p className="sr-only">
+        Use the left and right arrow keys to move between projects, and Enter to open the one in the centre.
+      </p>
 
-      <div className="relative h-[240px] sm:h-[300px] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-x-0 top-[17%] bottom-[27%] flex items-center justify-center tape-stage">
         {PROJECTS.map((proj, idx) => {
           let off = idx - i;
           if (off > n / 2) off -= n;
           if (off < -n / 2) off += n;
+          const a = Math.abs(off);
           const centre = off === 0;
           return (
             <button
               key={proj.title}
               onClick={() => (centre ? setOpen(true) : setI(idx))}
               aria-label={centre ? `Open ${proj.title}` : `Show ${proj.title}`}
-              className="tape absolute w-[min(72vw,440px)] aspect-[2/1] rounded-lg overflow-hidden border border-white/15 bg-[#0a0a0a] text-left"
+              className="tape absolute"
               style={{
-                transform: `translateX(${off * 62}%) scale(${centre ? 1 : 0.72})`,
-                opacity: Math.abs(off) > 1 ? 0 : centre ? 1 : 0.45,
-                zIndex: centre ? 2 : 1,
-                pointerEvents: Math.abs(off) > 1 ? "none" : "auto",
-                boxShadow: centre ? "0 0 40px rgba(255,49,49,0.18)" : "none",
+                transform: `translateX(calc(${off} * var(--w) * 1.35)) translateY(${a * 3.5}vh) rotate(${off * 13}deg) scale(${1 - a * 0.07})`,
+                opacity: a > 2 ? 0 : centre ? 1 : a === 1 ? 0.5 : 0.22,
+                filter: centre ? "none" : "brightness(0.7)",
+                zIndex: 10 - a,
+                pointerEvents: a > 2 ? "none" : "auto",
               }}>
-              <Visual type={proj.visual} title={proj.title} />
-              <span className="absolute bottom-0 inset-x-0 bg-[#111]/85 px-3 py-2 font-terminal-header text-[10px] tracking-widest uppercase text-on-surface-variant flex justify-between">
-                <span>{proj.badge}</span>
-                <span className="text-primary-container">▶ PLAY</span>
-              </span>
+              <Tape p={proj} />
             </button>
           );
         })}
       </div>
 
-      <div className="flex items-center justify-center gap-6 mt-8">
-        <button onClick={() => go(-1)} className="font-terminal-header text-lg text-on-surface-variant hover:text-primary-container" aria-label="Previous project">
-          ◀
-        </button>
-        <div className="text-center max-w-md" key={p.title}>
-          <h3 className="font-headline-lg text-xl sm:text-2xl text-on-surface channel-in">{p.title}</h3>
-          <p className="font-terminal-header text-[11px] text-outline tracking-widest uppercase mt-2 channel-in">
-            {p.tech.slice(0, 4).join(" • ")}
-          </p>
-        </div>
-        <button onClick={() => go(1)} className="font-terminal-header text-lg text-on-surface-variant hover:text-primary-container" aria-label="Next project">
-          ▶
-        </button>
+      <div key={p.title} className="absolute inset-x-0 bottom-[9.5%] px-[6%] text-center channel-in">
+        <p className="px text-ink-dim">
+          {p.title}, {String(i + 1).padStart(3, "0")}, {p.year}
+        </p>
+        <p className="px text-on-surface mt-1 max-w-[46ch] mx-auto !leading-tight line-clamp-2">{p.tagline}</p>
+        <p className="cap-tech px text-ink-dim mt-1 truncate">{p.tech.slice(0, 3).join(" • ")}</p>
       </div>
 
       {open && <Detail p={p} onClose={() => setOpen(false)} />}
-    </section>
+    </div>
   );
 }
