@@ -1,6 +1,6 @@
 import { TYPING_WORDS } from "../data/content.js";
 import { goTo } from "../nav.js";
-import { useTypewriter } from "../hooks.js";
+import { useWordRotator } from "../hooks.js";
 
 const btnPrimary =
   "bg-primary-container text-[#0e131f] font-terminal-header text-sm px-8 py-3 rounded flex items-center gap-2 hover:shadow-[0_0_30px_rgba(0,245,255,0.5)] hover:scale-105 transition-all duration-300";
@@ -71,7 +71,7 @@ const LOG = [
 ];
 
 export default function Hero() {
-  const typed = useTypewriter(TYPING_WORDS);
+  const typed = useWordRotator(TYPING_WORDS);
   return (
     <section
       id="hero"
@@ -85,7 +85,9 @@ export default function Hero() {
         <h1 className="font-display-xl text-display-xl hero-name leading-tight">MOHAMED KALITH K</h1>
 
         <p className="font-headline-lg text-xl md:text-2xl text-on-surface-variant leading-snug">
-          <span className="typing-text">{typed}</span>
+          <span key={typed} className="typing-text word-swap inline-block">
+            {typed}
+          </span>
         </p>
 
         <p className="font-body-md text-on-surface-variant/80 text-sm leading-relaxed max-w-md">

@@ -30,7 +30,7 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     title: "Smart Vehicle Assistance platform",
-    visual: "ride",
+    visual: "/projects/ride-relief.png",
     badge: "STATUS: ACTIVE",
     description:
       "AI-powered emergency mobility and roadside assistance platform with PWA architecture, real-time services, Firebase backend, and modern mobile-first experience.",
@@ -62,7 +62,7 @@ export const PROJECTS = [
 
 PROJECTS.push({
   title: "Smart Automobile User Manual Assistant",
-  visual: "manual",
+  visual: "/projects/manual-assistant.png",
   badge: "RAG PROJECT",
   description:
     "Upload a vehicle owner's manual and ask questions in plain English. A RAG system with adaptive retrieval (BM25 + dense search, query routing) returns step-by-step answers with exact manual page citations, and abstains when the evidence is too weak.",
@@ -71,13 +71,29 @@ PROJECTS.push({
   demo: null,
 });
 
+export const CERT_CATEGORIES = ["AI & ML", "Generative AI", "Data & Analytics", "Programming & Cloud", "Internships"];
+
+// date: "YYYY-MM" (used for sorting); file: served from /public/certificates
 export const CERTIFICATIONS = [
-  { icon: "cloud", color: "text-primary-container", issuer: "Coursera", title: "AWS Project Network", sub: "Cloud & Project Infrastructure" },
-  { icon: "psychology_alt", color: "text-secondary", issuer: "Udemy", title: "Machine Learning A-Z", sub: "Machine Learning & AI Engineering" },
-  { icon: "analytics", color: "text-cyan-300", issuer: "Forage", title: "GenAI Data Analytics", sub: "AI Analytics & Risk Profiling" },
-  { icon: "dataset", color: "text-primary-container", issuer: "Infosys", title: "Data Mining in R", sub: "Data Analytics & Mining" },
-  { icon: "monitoring", color: "text-primary-container", issuer: "Infosys", title: "Business Intelligence", sub: "Data Visualization & Decision Intelligence" },
-  { icon: "database", color: "text-green-300", issuer: "HackerRank", title: "SQL (Basic)", sub: "SQL Queries & Relational Databases" },
+  { title: "Applied AI Specialization (6 courses)", issuer: "Vanderbilt University", via: "Coursera", category: "Generative AI", date: "2026-10", file: "applied-ai-specialization.pdf" },
+  { title: "Deep Learning", issuer: "Illinois Tech", via: "Coursera", category: "AI & ML", date: "2026-09", file: "deep-learning.pdf" },
+  { title: "Applied Generative AI & Prompt Engineering Mastery", issuer: "LearnKartS", via: "Coursera", category: "Generative AI", date: "2026-08", file: "applied-genai-prompt-engineering-mastery.pdf" },
+  { title: "Data Analysis with Python", issuer: "freeCodeCamp", category: "Data & Analytics", date: "2026-04", file: "data-analysis-with-python.png" },
+  { title: "Applications of GeoGebra Training", issuer: "IIT Bombay", via: "EduPyramids, SINE", category: "Programming & Cloud", date: "2026-03", file: "geogebra-iit-bombay.pdf" },
+  { title: "Learn Java", issuer: "CodeChef", category: "Programming & Cloud", date: "2026-03", file: "learn-java-codechef.pdf" },
+  { title: "IT Intern, Medfits", issuer: "Medfits Healthcare", category: "Internships", date: "2026-05", file: "medfits-internship.pdf" },
+  { title: "Smart Automation Intern", issuer: "Chennai Port Authority", category: "Internships", date: "2025-07", file: "chennai-port-internship.jpg" },
+  { title: "GenAI Powered Data Analytics Job Simulation", issuer: "Forage", category: "Data & Analytics", date: "2025-07", file: "genai-data-analytics-forage.pdf" },
+  { title: "AI Training", issuer: "Corizo", category: "AI & ML", date: "2025-07", file: "corizo-ai-training.pdf" },
+  { title: "AI Internship", issuer: "Corizo", via: "IIT Bombay Mood Indigo", category: "Internships", date: "2025-07", file: "corizo-ai-internship.pdf" },
+  { title: "Machine Learning Intern", issuer: "Cognifyz Technologies", category: "Internships", date: "2025-06", file: "cognifyz-ml-internship.pdf" },
+  { title: "Linux Training", issuer: "IIT Bombay", via: "Spoken Tutorial", category: "Programming & Cloud", date: "2025-04", file: "linux-iit-bombay.pdf" },
+  { title: "AWS S3 Basics", issuer: "Coursera Project Network", category: "Programming & Cloud", date: "2025-04", file: "aws-s3-basics.pdf" },
+  { title: "Advanced C++ Training", issuer: "IIT Bombay", via: "Spoken Tutorial", category: "Programming & Cloud", date: "2025-02", file: "advanced-cpp-iit-bombay.pdf" },
+  { title: "SQL (Basic)", issuer: "HackerRank", category: "Data & Analytics", date: "2024-09", file: "sql-basic-hackerrank.pdf" },
+  { title: "Machine Learning A-Z", issuer: "Udemy", category: "AI & ML" },
+  { title: "Data Mining in R", issuer: "Infosys Springboard", category: "Data & Analytics" },
+  { title: "Business Intelligence", issuer: "Infosys Springboard", category: "Data & Analytics" },
 ];
 
 export const MAJOR_SUBJECTS = [

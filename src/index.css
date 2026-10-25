@@ -380,3 +380,18 @@ section[id] {
   html { scroll-behavior: auto; }
   .hero-in > *, .hero-card-in { animation: none; opacity: 1; }
 }
+
+/* ─── SMOOTH WORD SWAP (hero role text) ─── */
+@keyframes word-swap {
+  0% { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+  15%, 85% { opacity: 1; transform: none; filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-14px); filter: blur(6px); }
+}
+
+.word-swap {
+  animation: word-swap 2.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-swap { animation: none; }
+}

@@ -39,28 +39,14 @@ export function useActiveSection(ids) {
   return active;
 }
 
-export function useTypewriter(words) {
-  const [text, setText] = useState("");
+// Cycles through words on a timer; pair with a keyed element for a CSS transition.
+export function useWordRotator(words, interval = 2800) {
+  const [i, setI] = useState(0);
   useEffect(() => {
-    let w = 0, c = 0, erasing = false, timer;
-    const tick = () => {
-      const word = words[w];
-      if (!erasing) {
-        c++;
-        setText(word.slice(0, c));
-        if (c === word.length) { erasing = true; timer = setTimeout(tick, 2000); return; }
-        timer = setTimeout(tick, 100);
-      } else {
-        c--;
-        setText(word.slice(0, c));
-        if (c === 0) { erasing = false; w = (w + 1) % words.length; timer = setTimeout(tick, 300); return; }
-        timer = setTimeout(tick, 50);
-      }
-    };
-    timer = setTimeout(tick, 100);
-    return () => clearTimeout(timer);
-  }, [words]);
-  return text;
+    const t = setInterval(() => setI((n) => (n + 1) % words.length), interval);
+    return () => clearInterval(t);
+  }, [words, interval]);
+  return words[i];
 }
 
 // Feeds the cursor position to any .glass-panel for its hover glow.

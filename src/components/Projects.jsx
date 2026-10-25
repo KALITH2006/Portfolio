@@ -101,7 +101,7 @@ function Visual({ type, title }) {
     <img
       src={type}
       alt={title}
-      className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
+      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
     />
   );
 }

@@ -30,12 +30,12 @@ export default function Experience() {
 
           <div className="pl-12 md:pl-0 md:w-[45%] order-2">
             <div className="glass-panel p-6 rounded-2xl border border-primary-container/10 hover:border-primary-container/30 hover:shadow-[0_0_35px_rgba(0,245,255,0.08)] transition-all duration-500">
-              <div className="mb-5 overflow-hidden rounded-xl border border-primary-container/20 relative group">
+              <div className="mb-5 overflow-hidden rounded-xl border border-primary-container/20 relative group bg-white">
                 <div className="absolute inset-0 bg-primary-container/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                 <img
                   src="/chennai_port.png"
                   alt="Chennai Port Authority"
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-700"
+                  className="w-full h-56 object-contain p-3 hover:scale-105 transition-transform duration-700"
                 />
               </div>
 
@@ -57,7 +57,7 @@ export default function Experience() {
               </div>
 
               <a
-                href="https://drive.google.com/file/d/1TA5Zrk7wwQIguOa-7YkE8zhfVYtme6uM/view?usp=sharing"
+                href="/certificates/chennai-port-internship.jpg"
                 target="_blank"
                 rel="noreferrer"
                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-container/40 text-primary-container font-terminal-header text-sm hover:bg-primary-container hover:text-[#050816] hover:shadow-[0_0_25px_rgba(0,245,255,0.35)] transition-all duration-300">
@@ -82,11 +82,11 @@ export default function Experience() {
 
           <div className="pl-12 md:pl-0 md:w-[45%] order-2">
             <div className="glass-panel p-6 rounded-lg hover:shadow-[0_0_20px_rgba(123,208,255,0.08)] transition-shadow">
-              <div className="mb-5 overflow-hidden rounded-lg border border-secondary/20">
+              <div className="mb-5 overflow-hidden rounded-lg border border-secondary/20 bg-white">
                 <img
                   src="/medfits.jpg"
                   alt="MedFits AI Doctor"
-                  className="w-full h-52 object-cover hover:scale-105 transition-transform duration-500"
+                  className="w-full h-56 object-contain p-3 hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -106,7 +106,7 @@ export default function Experience() {
               </div>
 
               <a
-                href="/medfits-certificate.pdf"
+                href="/certificates/medfits-internship.pdf"
                 target="_blank"
                 rel="noreferrer"
                 className="group mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-secondary/40 text-secondary font-terminal-header text-sm hover:bg-secondary hover:text-[#050816] hover:shadow-[0_0_25px_rgba(123,208,255,0.35)] transition-all duration-300">
