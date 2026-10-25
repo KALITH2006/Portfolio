@@ -231,3 +231,46 @@ body { font-family: 'IBM Plex Mono', monospace; }
   .intern-slide, .intern-img { transition: none; }
   .intern-copy > * { animation: none; opacity: 1; }
 }
+
+/* ─── 404: lost signal ─── */
+.static-noise {
+  background-image: var(--noise);
+  opacity: 0.1;
+  animation: crt-flicker 0.25s steps(2) infinite;
+}
+
+.glitch { position: relative; }
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.glitch::before {
+  color: var(--brand);
+  transform: translate(-4px, 0);
+  clip-path: inset(0 0 55% 0);
+  mix-blend-mode: screen;
+  animation: glitch-a 2.6s infinite steps(1);
+}
+.glitch::after {
+  color: #4d7cff;
+  transform: translate(4px, 0);
+  clip-path: inset(60% 0 0 0);
+  mix-blend-mode: screen;
+  animation: glitch-b 3.1s infinite steps(1);
+}
+@keyframes glitch-a {
+  0%, 88%, 100% { transform: translate(-3px, 0); clip-path: inset(0 0 55% 0); }
+  90% { transform: translate(-10px, 2px); clip-path: inset(20% 0 40% 0); }
+  94% { transform: translate(6px, -2px); clip-path: inset(50% 0 10% 0); }
+}
+@keyframes glitch-b {
+  0%, 84%, 100% { transform: translate(3px, 0); clip-path: inset(60% 0 0 0); }
+  86% { transform: translate(10px, 3px); clip-path: inset(10% 0 60% 0); }
+  92% { transform: translate(-6px, 0); clip-path: inset(35% 0 30% 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .static-noise, .glitch::before, .glitch::after { animation: none; }
+}

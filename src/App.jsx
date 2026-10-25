@@ -8,10 +8,11 @@ import Profile from "./components/Profile.jsx";
 import Internships from "./components/Internships.jsx";
 import Certificates from "./components/Certificates.jsx";
 import Contact from "./components/Contact.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const pageFromPath = (path) => {
   const clean = path.replace(/\/+$/, "") || "/";
-  return PAGES.find((p) => p.path === clean || p.aliases.includes(clean))?.id ?? "home";
+  return PAGES.find((p) => p.path === clean || p.aliases.includes(clean))?.id ?? "404";
 };
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
           {page === "internships" && <Internships />}
           {page === "certificates" && <Certificates />}
           {page === "contact" && <Contact notify={notify} />}
+          {page === "404" && <NotFound onHome={() => navigate("home")} />}
         </main>
 
         <TopBar page={page} onNavigate={navigate} />
