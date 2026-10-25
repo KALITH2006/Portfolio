@@ -105,7 +105,7 @@
       color: #ff5a5a;
       font-size: 24px;
       margin-bottom: 30px;
-      font-family: 'Pixelify Sans';
+      font-family: 'Jersey 15';
       min-height: 35px;
     }
 
@@ -434,3 +434,44 @@ h1, h2, h3 { letter-spacing: 0.01em; }
 @media (prefers-reduced-motion: reduce) {
   .crt-overlay::after { animation: none; }
 }
+
+/* ─── ARC STRUCTURE: TV SHELL ─── */
+html, body { height: 100%; overflow: hidden; background: #000; }
+
+.no-scrollbar { scrollbar-width: none; scroll-behavior: smooth; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.screen {
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 60px rgba(255, 49, 49, 0.06);
+}
+.screen.bw { filter: grayscale(1) contrast(1.05); }
+.screen { transition: filter 0.4s; }
+
+/* the overlay lives inside the screen, not the viewport */
+.screen .crt-overlay { position: absolute; z-index: 60; border-radius: inherit; }
+.screen .cyber-grid, .screen .fixed { position: absolute; }
+
+/* switching channel: short static flash then settle */
+@keyframes channel-in {
+  0% { opacity: 0; filter: blur(8px) brightness(2); transform: scaleY(0.985); }
+  40% { opacity: 1; filter: blur(2px) brightness(1.3); }
+  100% { opacity: 1; filter: none; transform: none; }
+}
+.channel-in { animation: channel-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* loader power-off */
+@keyframes boot-off {
+  0% { opacity: 1; transform: none; }
+  60% { opacity: 1; transform: scaleY(0.02); }
+  100% { opacity: 0; transform: scaleY(0.02) scaleX(0); }
+}
+.boot-off { animation: boot-off 0.5s ease-in forwards; }
+
+.tape { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s, box-shadow 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .channel-in, .boot-off { animation: none; }
+}
+
+/* Jersey 15 has a small x-height; match it to the body fonts */
+.font-display-xl, .font-headline-lg, .typing-text { font-size-adjust: 0.5; }

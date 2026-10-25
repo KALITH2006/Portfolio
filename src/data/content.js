@@ -1,10 +1,9 @@
-export const NAV_LINKS = [
-  { id: "hero", path: "/", label: "About" },
-  { id: "skills", path: "/skills", label: "Skills" },
-  { id: "projects", path: "/projects", label: "Projects" },
-  { id: "experience", path: "/internships", label: "Internships" },
-  { id: "education-certifications", path: "/certifications", label: "Certifications" },
-  { id: "contact", path: "/contact", label: "Contact" },
+// Each page is one "channel" on the screen. Old section paths still resolve.
+export const PAGES = [
+  { id: "home", path: "/", label: "Home", aliases: ["/projects"] },
+  { id: "profile", path: "/profile", label: "Profile", aliases: ["/skills", "/certifications"] },
+  { id: "internships", path: "/internships", label: "Internships", aliases: ["/news"] },
+  { id: "contact", path: "/contact", label: "Contact", aliases: [] },
 ];
 
 export const TYPING_WORDS = [

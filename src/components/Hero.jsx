@@ -1,5 +1,4 @@
 import { TYPING_WORDS } from "../data/content.js";
-import { goTo } from "../nav.js";
 import { useWordRotator } from "../hooks.js";
 
 const btnPrimary =
@@ -75,7 +74,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="max-w-[1440px] mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-69px)]">
+      className="max-w-[1440px] mx-auto px-8 py-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div className="hero-in flex flex-col gap-6">
         <div className="inline-flex items-center gap-2 border border-primary-container/30 px-3 py-1 rounded bg-primary-container/10 w-fit animate-float">
           <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse" />
@@ -96,7 +95,10 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-wrap gap-4 mt-2">
-          <a href="/projects" onClick={(e) => goTo(e, "projects")} className={btnPrimary}>
+          <a href="#projects" onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+            }} className={btnPrimary}>
             View Projects
             <span className="material-symbols-outlined text-base leading-none">arrow_forward</span>
           </a>
@@ -120,7 +122,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-card-in">
-      <div className="glass-panel rounded-lg p-6 flex flex-col gap-4 h-[500px] cyan-glow animate-float-delayed">
+      <div className="glass-panel rounded-lg p-6 flex flex-col gap-4 h-[380px] cyan-glow animate-float-delayed">
         <div className="flex justify-between items-center border-b border-white/10 pb-4 shrink-0">
           <div className="border-r-2 border-primary-container/70 pr-2">
             <span className="font-terminal-header text-sm text-on-surface tracking-widest">MOHAMED_KALITH_AI_SYSTEM</span>

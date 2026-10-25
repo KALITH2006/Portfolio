@@ -65,11 +65,11 @@ export default {
             "container-max": "1440px"
           },
           fontFamily: {
-            "headline-lg-mobile": ["Pixelify Sans", "monospace"],
+            "headline-lg-mobile": ['"Jersey 15"', "monospace"],
             "body-sm": ["Inter"],
             "terminal-header": ["IBM Plex Mono", "monospace"],
-            "display-xl": ["Pixelify Sans", "monospace"],
-            "headline-lg": ["Pixelify Sans", "monospace"],
+            "display-xl": ['"Jersey 15"', "monospace"],
+            "headline-lg": ['"Jersey 15"', "monospace"],
             "label-caps": ["IBM Plex Mono", "monospace"],
             "body-md": ["Inter"]
           },

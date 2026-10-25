@@ -1,13 +1,17 @@
 import { SKILLS } from "../data/content.js";
-import { useReveal } from "../hooks.js";
+import { useEffect, useState } from "react";
 import { Section, SectionHeading } from "./Section.jsx";
 
 export default function Skills() {
-  const [gridRef, animate] = useReveal(0.2);
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setAnimate(true), 350);
+    return () => clearTimeout(t);
+  }, []);
   return (
     <Section id="skills">
       <SectionHeading icon="developer_board">Core Technologies &amp; Engineering Systems</SectionHeading>
-      <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {SKILLS.map((s) => (
           <div
             key={s.name}

@@ -1,6 +1,3 @@
-import { PROJECTS } from "../data/content.js";
-import { Chip, Section, SectionHeading } from "./Section.jsx";
-
 function RideVisual() {
   return (
     <svg className="w-full h-full opacity-60 mix-blend-screen" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +90,7 @@ function ManualVisual() {
   );
 }
 
-function Visual({ type, title }) {
+export function Visual({ type, title }) {
   if (type === "ride") return <RideVisual />;
   if (type === "nlp") return <NlpVisual />;
   if (type === "manual") return <ManualVisual />;
@@ -103,74 +100,5 @@ function Visual({ type, title }) {
       alt={title}
       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
     />
-  );
-}
-
-const linkBase =
-  "flex-1 font-terminal-header text-xs py-2 rounded flex items-center justify-center gap-2 transition-all";
-
-function ProjectCard({ p }) {
-  return (
-    <div className="glass-panel rounded-xl overflow-hidden group flex flex-col hover:shadow-[0_0_30px_rgba(255,49,49,0.1)] hover:-translate-y-1 transition-all duration-500">
-      <div className="h-48 bg-[#0a0a0a] relative overflow-hidden shrink-0">
-        <div className="absolute inset-0 bg-primary-container/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-        <Visual type={p.visual} title={p.title} />
-        <div className="absolute top-4 right-4 z-20">
-          <span className="px-2 py-1 bg-[#0a0a0a]/80 text-primary-container font-terminal-header text-[10px] rounded border border-primary-container/30 backdrop-blur-sm tracking-wider">
-            {p.badge}
-          </span>
-        </div>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="font-headline-lg text-2xl text-on-surface group-hover:text-primary-container transition-colors mb-2">
-          {p.title}
-        </h3>
-        <p className="font-body-md text-on-surface-variant text-sm mb-6 leading-relaxed flex-grow">{p.description}</p>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {p.tech.map((t) => (
-            <Chip key={t} className="text-secondary">
-              {t}
-            </Chip>
-          ))}
-        </div>
-        <div className="flex gap-3">
-          <a
-            href={p.github}
-            target="_blank"
-            rel="noreferrer"
-            className={`${linkBase} border border-white/15 text-on-surface-variant hover:border-primary-container hover:text-primary-container`}>
-            <span className="material-symbols-outlined text-base leading-none">code</span> GitHub
-          </a>
-          {p.demo ? (
-            <a
-              href={p.demo}
-              target="_blank"
-              rel="noreferrer"
-              className={`${linkBase} border border-primary-container/40 text-primary-container hover:bg-primary-container/10`}>
-              <span className="material-symbols-outlined text-base leading-none">open_in_new</span> Live Demo
-            </a>
-          ) : (
-            <span
-              className={`${linkBase} border border-white/10 text-outline cursor-not-allowed`}
-              title="Live demo coming soon">
-              <span className="material-symbols-outlined text-base leading-none">schedule</span> Coming Soon
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function Projects() {
-  return (
-    <Section id="projects" className="border-t border-dashed border-white/10">
-      <SectionHeading icon="dns">Featured Engineering Projects</SectionHeading>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {PROJECTS.map((p) => (
-          <ProjectCard key={p.title} p={p} />
-        ))}
-      </div>
-    </Section>
   );
 }

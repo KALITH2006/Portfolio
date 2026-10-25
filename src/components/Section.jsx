@@ -1,12 +1,8 @@
-import { useReveal } from "../hooks.js";
-
 export function Section({ id, className = "", children }) {
-  const [ref, visible] = useReveal();
   return (
     <section
       id={id}
-      ref={ref}
-      className={`max-w-[1440px] mx-auto px-8 py-24 reveal ${visible ? "visible" : ""} ${className}`}>
+      className={`max-w-[1440px] mx-auto px-8 py-16 ${className}`}>
       {children}
     </section>
   );
