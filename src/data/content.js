@@ -71,7 +71,7 @@ PROJECTS.push({
   demo: null,
 });
 
-export const CERT_CATEGORIES = ["AI & ML", "Generative AI", "Data & Analytics", "Programming & Cloud", "Internships"];
+export const CERT_CATEGORIES = ["AI & ML", "Generative AI", "Data & Analytics", "Programming & Cloud"];
 
 // date: "YYYY-MM" (used for sorting); file: served from /public/certificates
 export const CERTIFICATIONS = [
@@ -81,12 +81,8 @@ export const CERTIFICATIONS = [
   { title: "Data Analysis with Python", issuer: "freeCodeCamp", category: "Data & Analytics", date: "2026-04", file: "data-analysis-with-python.png" },
   { title: "Applications of GeoGebra Training", issuer: "IIT Bombay", via: "EduPyramids, SINE", category: "Programming & Cloud", date: "2026-03", file: "geogebra-iit-bombay.pdf" },
   { title: "Learn Java", issuer: "CodeChef", category: "Programming & Cloud", date: "2026-03", file: "learn-java-codechef.pdf" },
-  { title: "IT Intern, Medfits", issuer: "Medfits Healthcare", category: "Internships", date: "2026-05", file: "medfits-internship.pdf" },
-  { title: "Smart Automation Intern", issuer: "Chennai Port Authority", category: "Internships", date: "2025-07", file: "chennai-port-internship.jpg" },
   { title: "GenAI Powered Data Analytics Job Simulation", issuer: "Forage", category: "Data & Analytics", date: "2025-07", file: "genai-data-analytics-forage.pdf" },
   { title: "AI Training", issuer: "Corizo", category: "AI & ML", date: "2025-07", file: "corizo-ai-training.pdf" },
-  { title: "AI Internship", issuer: "Corizo", via: "IIT Bombay Mood Indigo", category: "Internships", date: "2025-07", file: "corizo-ai-internship.pdf" },
-  { title: "Machine Learning Intern", issuer: "Cognifyz Technologies", category: "Internships", date: "2025-06", file: "cognifyz-ml-internship.pdf" },
   { title: "Linux Training", issuer: "IIT Bombay", via: "Spoken Tutorial", category: "Programming & Cloud", date: "2025-04", file: "linux-iit-bombay.pdf" },
   { title: "AWS S3 Basics", issuer: "Coursera Project Network", category: "Programming & Cloud", date: "2025-04", file: "aws-s3-basics.pdf" },
   { title: "Advanced C++ Training", issuer: "IIT Bombay", via: "Spoken Tutorial", category: "Programming & Cloud", date: "2025-02", file: "advanced-cpp-iit-bombay.pdf" },

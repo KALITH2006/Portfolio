@@ -7,15 +7,46 @@ const DOT = {
   "Generative AI": "bg-violet-500",
   "Data & Analytics": "bg-tertiary-container",
   "Programming & Cloud": "bg-emerald-400",
-  Internships: "bg-secondary",
 };
 const TEXT = {
   "AI & ML": "text-primary-container",
   "Generative AI": "text-violet-400",
   "Data & Analytics": "text-tertiary-container",
   "Programming & Cloud": "text-emerald-300",
-  Internships: "text-secondary",
 };
+
+// Brand logo (public/logos) where one exists, otherwise a Material icon.
+const LOGOS = [
+  [/coursera/i, "coursera"],
+  [/udemy/i, "udemy"],
+  [/hackerrank/i, "hackerrank"],
+  [/codechef/i, "codechef"],
+  [/freecodecamp/i, "freecodecamp"],
+  [/infosys/i, "infosys"],
+];
+const ICONS = [
+  [/aws/i, "cloud"],
+  [/iit bombay/i, "account_balance"],
+  [/forage/i, "work"],
+  [/corizo/i, "workspace_premium"],
+];
+
+function IssuerLogo({ c }) {
+  const hay = `${c.title} ${c.issuer} ${c.via ?? ""}`;
+  const icon = ICONS.find(([re]) => re.test(hay))?.[1];
+  const logo = !icon && LOGOS.find(([re]) => re.test(hay))?.[1];
+  return (
+    <div className="w-12 h-12 shrink-0 rounded-full bg-[#050816] flex items-center justify-center border border-primary-container/20 group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(0,245,255,0.35)] transition-all duration-300">
+      {logo ? (
+        <img src={`/logos/${logo}.svg`} alt="" className="w-6 h-6 group-hover:scale-110 transition-transform" />
+      ) : (
+        <span className="material-symbols-outlined text-primary-container text-2xl group-hover:scale-110 transition-transform">
+          {icon ?? "school"}
+        </span>
+      )}
+    </div>
+  );
+}
 
 const fmtDate = (d) =>
   d ? new Date(`${d}-01T00:00:00`).toLocaleString("en-US", { month: "short", year: "numeric" }).toUpperCase() : "";
@@ -24,10 +55,10 @@ function Pill({ active, onClick, children, count }) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-full border font-body-sm text-sm whitespace-nowrap transition-all duration-300 ${
+      className={`px-4 py-2 rounded border font-terminal-header text-xs tracking-wider whitespace-nowrap transition-all duration-300 ${
         active
-          ? "bg-white text-[#0e131f] border-white"
-          : "border-white/15 text-on-surface hover:border-primary-container hover:text-primary-container"
+          ? "bg-primary-container text-[#0e131f] border-primary-container shadow-[0_0_20px_rgba(0,245,255,0.35)]"
+          : "border-white/15 text-on-surface-variant hover:border-primary-container hover:text-primary-container"
       }`}>
       {children} <sup className="text-[10px] opacity-70">{count}</sup>
     </button>
@@ -40,29 +71,40 @@ function CertCard({ c }) {
   return (
     <Wrapper
       {...props}
-      className="group glass-panel rounded-2xl p-6 flex flex-col gap-3 min-h-[200px] border border-white/10 hover:border-primary-container/40 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,245,255,0.08)] transition-all duration-300">
-      <div className="flex items-center justify-between font-terminal-header text-[11px] tracking-widest text-outline">
-        <span className="flex items-center gap-2 uppercase">
+      className="group cert-badge p-6 rounded-lg flex flex-col gap-4 min-h-[210px] hover:-translate-y-1 transition-all duration-300">
+      <div className="flex items-start justify-between gap-3">
+        <IssuerLogo c={c} />
+        <div className="flex flex-col items-end gap-1">
+          <span className="font-terminal-header text-[10px] text-outline border border-white/10 px-2 py-1 rounded uppercase">
+            {c.via ?? c.issuer}
+          </span>
+          {c.date && <span className="font-terminal-header text-[10px] text-outline tracking-widest">{fmtDate(c.date)}</span>}
+        </div>
+      </div>
+
+      <div>
+        <h4 className="font-terminal-header text-sm text-on-surface group-hover:text-primary-container transition-colors mb-2 leading-snug">
+          {c.title}
+        </h4>
+        <p className="font-body-sm text-outline text-xs">
+          {c.via ? c.issuer : c.category}
+        </p>
+      </div>
+
+      <div className="mt-auto flex items-center justify-between font-terminal-header text-[11px]">
+        <span className="flex items-center gap-2 text-outline uppercase tracking-wider">
           <span className={`w-2 h-2 rounded-full ${DOT[c.category]}`} />
           {c.category}
         </span>
-        <span>{fmtDate(c.date)}</span>
-      </div>
-      <h4 className="font-headline-lg text-xl text-on-surface leading-snug group-hover:text-primary-container transition-colors">
-        {c.title}
-      </h4>
-      <p className="font-body-sm text-on-surface-variant text-sm">
-        {c.issuer}
-        {c.via && <> · via {c.via}</>}
-      </p>
-      {c.file && (
-        <span className={`mt-auto font-terminal-header text-sm ${TEXT[c.category]} flex items-center gap-1`}>
-          view
-          <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-            north_east
+        {c.file && (
+          <span className={`${TEXT[c.category]} flex items-center gap-1 text-xs`}>
+            view
+            <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+              north_east
+            </span>
           </span>
-        </span>
-      )}
+        )}
+      </div>
     </Wrapper>
   );
 }
@@ -116,9 +158,12 @@ export default function Education() {
       </div>
 
       <div className="mt-20 flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
-        <h2 className="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight">
-          Certifications <sup className="text-xl text-outline font-normal">({CERTIFICATIONS.length})</sup>
-        </h2>
+        <div className="flex items-center gap-4">
+          <span className="material-symbols-outlined text-primary-container text-3xl">workspace_premium</span>
+          <h2 className="font-display-xl text-3xl md:text-5xl font-bold text-on-surface tracking-tight section-line">
+            Certifications <sup className="text-xl text-outline font-normal">({CERTIFICATIONS.length})</sup>
+          </h2>
+        </div>
         <div className="flex flex-wrap gap-3">
           {["All", ...CERT_CATEGORIES].map((cat) => (
             <Pill key={cat} active={filter === cat} onClick={() => setFilter(cat)} count={count(cat)}>
