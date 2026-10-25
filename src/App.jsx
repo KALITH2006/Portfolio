@@ -47,7 +47,7 @@ export default function App() {
       <div className={`screen relative h-full rounded-[22px] sm:rounded-[44px] overflow-hidden ${bw ? "bw" : ""}`}>
         <main key={page} className="absolute inset-0 z-10 channel-in">
           {page === "home" && <Tapes active={booted} />}
-          {page === "profile" && <Profile />}
+          {page === "profile" && <Profile onNavigate={navigate} />}
           {page === "internships" && <Internships />}
           {page === "certificates" && <Certificates />}
           {page === "contact" && <Contact notify={notify} />}

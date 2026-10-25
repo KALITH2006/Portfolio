@@ -35,7 +35,7 @@ function Meter({ value }) {
   );
 }
 
-export default function Profile() {
+export default function Profile({ onNavigate }) {
   const [open, setOpen] = useState(null);
 
   return (
@@ -56,9 +56,13 @@ export default function Profile() {
               Download resume ↓
             </a>
             <a
-              href={`mailto:${CONTACT.email}`}
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate("contact");
+              }}
               className="px !text-lg rounded-full border border-white/25 px-6 py-2.5 hover:border-primary-container hover:text-primary-container transition-colors">
-              Get in touch ↗
+              Get in touch →
             </a>
           </div>
         </header>
