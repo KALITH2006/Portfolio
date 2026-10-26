@@ -172,3 +172,8 @@ export const SKILL_GROUPS = [
   { title: "Data & Infra", skills: ["PostgreSQL", "Docker"] },
   { title: "Security", skills: ["Cybersecurity"] },
 ];
+
+// URL fragment for each placement, e.g. /internships#medfits
+INTERNSHIPS.forEach((it) => {
+  it.slug = it.org.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+});

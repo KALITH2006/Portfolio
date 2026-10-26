@@ -28,7 +28,11 @@ const TONES = ["#4a1d22", "#3d3a1a", "#1f2250", "#17383a"];
 
 // Featured-work style: one big panel, scroll / swipe / arrows wipe to the next placement.
 export default function Internships() {
-  const [i, setI] = useState(0);
+  // /internships#<slug> opens on that placement (this is where the Profile links land)
+  const [i, setI] = useState(() => {
+    const at = INTERNSHIPS.findIndex((x) => x.slug === window.location.hash.slice(1));
+    return at === -1 ? 0 : at;
+  });
   const [open, setOpen] = useState(false);
   const lock = useRef(0);
   const touch = useRef(null);
@@ -69,6 +73,10 @@ export default function Internships() {
   }, [go, open]);
 
   const it = INTERNSHIPS[i];
+
+  useEffect(() => {
+    window.history.replaceState(null, "", `/internships#${it.slug}`);
+  }, [it.slug]);
 
   return (
     <div

@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { CONTACT, INTERNSHIPS, MAJOR_SUBJECTS, SKILLS, SKILL_GROUPS } from "../data/content.js";
-import { InternshipDetail } from "./Internships.jsx";
 
 const FACTS = [
   ["Based in", "Chennai, India"],
@@ -36,8 +34,6 @@ function Meter({ value }) {
 }
 
 export default function Profile({ onNavigate }) {
-  const [open, setOpen] = useState(null);
-
   return (
     <div className="absolute inset-0 overflow-y-auto no-scrollbar pt-[17%] sm:pt-[10.5%] pb-[13%] px-[6%]">
       <div className="mx-auto max-w-5xl">
@@ -112,7 +108,7 @@ export default function Profile({ onNavigate }) {
               {INTERNSHIPS.map((it) => (
                 <li key={it.org} className="border-b border-white/10 first:pt-0">
                   <button
-                    onClick={() => setOpen(it)}
+                    onClick={() => onNavigate("internships", it.slug)}
                     className="group w-full text-left grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-x-6 gap-y-1 py-4 items-baseline">
                     <span>
                       <span className="serif text-2xl sm:text-3xl leading-none text-on-surface group-hover:text-primary-container transition-colors">
@@ -171,7 +167,6 @@ export default function Profile({ onNavigate }) {
         </div>
       </div>
 
-      {open && <InternshipDetail it={open} onClose={() => setOpen(null)} />}
     </div>
   );
 }

@@ -45,13 +45,23 @@ function Detail({ p, onClose }) {
   );
 }
 
-// Projects as VHS tapes: arrows move, Enter opens the centred one.
+const AUTO_MS = 3500;
+
+// Projects as VHS tapes (they roll on by themselves; hover to hold): arrows move, Enter opens the centred one.
 export default function Tapes({ active }) {
   const [i, setI] = useState(0);
   const [open, setOpen] = useState(false);
   const n = PROJECTS.length;
   const go = useCallback((d) => setI((v) => (v + d + n) % n), [n]);
+  const [paused, setPaused] = useState(false);
   const drag = useRef(null);
+
+  // Auto-advance to the next tape; any manual move (or hover) restarts / holds the timer.
+  useEffect(() => {
+    if (!active || open || paused) return;
+    const t = setTimeout(() => go(1), AUTO_MS);
+    return () => clearTimeout(t);
+  }, [active, open, paused, i, go]);
 
   useEffect(() => {
     if (!active || open) return;
@@ -69,12 +79,21 @@ export default function Tapes({ active }) {
   return (
     <div
       className="absolute inset-0"
-      onPointerDown={(e) => (drag.current = e.clientX)}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => {
+        drag.current = null;
+        setPaused(false);
+      }}
+      onPointerDown={(e) => {
+        drag.current = e.clientX;
+        setPaused(true);
+      }}
       onPointerUp={(e) => {
         if (drag.current == null) return;
         const dx = e.clientX - drag.current;
         drag.current = null;
         if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+        if (e.pointerType !== "mouse") setPaused(false);
       }}>
       <p className="sr-only">
         Use the left and right arrow keys to move between projects, and Enter to open the one in the centre.

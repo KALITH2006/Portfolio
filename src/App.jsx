@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PAGES } from "./data/content.js";
 import Loader from "./components/Loader.jsx";
+import TvCrash from "./components/TvCrash.jsx";
 import TopBar from "./components/TopBar.jsx";
 import BottomBar from "./components/BottomBar.jsx";
 import Tapes from "./components/Tapes.jsx";
@@ -17,7 +18,9 @@ const pageFromPath = (path) => {
 
 export default function App() {
   const [page, setPage] = useState(() => pageFromPath(window.location.pathname));
+  const [crashed, setCrashed] = useState(false);
   const [booted, setBooted] = useState(false);
+  const [loaderGone, setLoaderGone] = useState(false);
   const [bw, setBw] = useState(false);
   const [toast, setToast] = useState(null);
   const timer = useRef();
@@ -29,10 +32,17 @@ export default function App() {
   }, []);
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  const navigate = useCallback((id) => {
+  // keep the loader mounted while it fades out over the page coming in
+  useEffect(() => {
+    if (!booted) return;
+    const t = setTimeout(() => setLoaderGone(true), 900);
+    return () => clearTimeout(t);
+  }, [booted]);
+
+  const navigate = useCallback((id, hash = "") => {
     const target = PAGES.find((p) => p.id === id);
     if (!target) return;
-    window.history.pushState(null, "", target.path);
+    window.history.pushState(null, "", target.path + (hash ? `#${hash}` : ""));
     setPage(id);
   }, []);
 
@@ -44,21 +54,30 @@ export default function App() {
 
   return (
     <div className="fixed inset-0 bg-black p-2 sm:p-4">
-      <div className={`screen relative h-full rounded-[22px] sm:rounded-[44px] overflow-hidden ${bw ? "bw" : ""}`}>
-        <main key={page} className="absolute inset-0 z-10 channel-in">
-          {page === "home" && <Tapes active={booted} />}
-          {page === "profile" && <Profile onNavigate={navigate} />}
-          {page === "internships" && <Internships />}
-          {page === "certificates" && <Certificates />}
-          {page === "contact" && <Contact notify={notify} />}
-          {page === "404" && <NotFound onHome={() => navigate("home")} />}
-        </main>
+      <div
+        data-booted={booted}
+        className={`screen relative h-full rounded-[22px] sm:rounded-[44px] overflow-hidden ${bw ? "bw" : ""}`}>
+        <div className="crt-bg" aria-hidden="true" />
+        <div className="stage absolute inset-0 z-10">
+          <main key={page} className="absolute inset-0 z-10 channel-in">
+            {page === "home" && <Tapes active={booted} />}
+            {page === "profile" && <Profile onNavigate={navigate} />}
+            {page === "internships" && <Internships />}
+            {page === "certificates" && <Certificates />}
+            {page === "contact" && <Contact notify={notify} />}
+            {page === "404" && <NotFound onHome={() => navigate("home")} />}
+          </main>
+        </div>
 
         <TopBar page={page} onNavigate={navigate} />
         <BottomBar bw={bw} onToggleBw={() => setBw((v) => !v)} />
 
         <div className="crt-overlay" aria-hidden="true" />
-        {!booted && <Loader onDone={() => setBooted(true)} />}
+        {!crashed ? (
+          <TvCrash onDone={() => setCrashed(true)} />
+        ) : (
+          !loaderGone && <Loader leaving={booted} onDone={() => setBooted(true)} />
+        )}
 
         <div id="toast" role="status" aria-live="polite" className={toast ? `show ${toast.type}` : ""}>
           {toast?.msg}

@@ -28,7 +28,7 @@ export default function TopBar({ page, onNavigate }) {
   const clock = useSessionClock();
   const [home, ...rest] = PAGES;
   return (
-    <header className="absolute top-0 inset-x-0 z-40 px-[6%] pt-[3.4%] pb-8 bg-gradient-to-b from-[#151515] via-[#151515]/90 to-transparent grid grid-cols-[1fr_auto_1fr] items-start gap-3">
+    <header className="stage absolute top-0 inset-x-0 z-40 px-[6%] pt-[3.4%] pb-8 bg-gradient-to-b from-[#151515] via-[#151515]/90 to-transparent grid grid-cols-[1fr_auto_1fr] items-start gap-3">
       <div className="flex items-start gap-[8%] sm:gap-10">
         <Item p={home} page={page} onNavigate={onNavigate} />
         <span className="px text-ink-dim hidden sm:block">{clock}</span>
