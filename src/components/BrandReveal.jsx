@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { restoreFavicon } from "../favicon.js";
 
-// After the loader: "MOHAMED KALITH" appears, squeezes down to "MK", turns into the favicon badge,
+// After the loader: "MOHAMED KALITH" flickers in like the 404 glitch, squeezes down to "MK", turns into the favicon badge,
 // then flies up to where the browser-tab icon sits, and the real favicon takes over.
-const TIMELINE = { collapse: 1150, badge: 1700, fly: 2150, done: 3150 };
+const TIMELINE = { collapse: 1950, badge: 2500, fly: 2950, done: 3950 };
 const FLY_MS = 950;
 const TAB_X = 30; // roughly where the tab icon is, from the left edge of the window
 const TAB_Y = -14; // just above the page, i.e. inside the tab strip

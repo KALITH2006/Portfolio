@@ -34,9 +34,9 @@ export default function TopBar({ page, onNavigate }) {
         <span className="px text-ink-dim hidden sm:block">{clock}</span>
       </div>
 
-      <button onClick={() => onNavigate("home")} className="flex flex-col items-center -mt-1" aria-label="Home">
-        <span className="px !text-[1.9rem] sm:!text-[2.3rem] text-on-surface leading-none flex items-center border-b border-white/70 pb-1">
-          KALITH
+      <button onClick={() => onNavigate("home")} className="logo-btn flex flex-col items-center -mt-1" aria-label="Home">
+        <span data-text="MOHAMED KALITH" className="logo-name px relative !text-[1.1rem] sm:!text-[2.3rem] text-on-surface leading-none flex items-center whitespace-nowrap border-b border-white/70 pb-1">
+          MOHAMED KALITH
         </span>
         <span className="px !text-[0.8rem] text-ink-dim flex justify-between w-full mt-1">
           <span>Year</span>

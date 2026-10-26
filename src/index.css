@@ -126,15 +126,16 @@ body { font-family: 'IBM Plex Mono', monospace; }
 }
 
 /* ─── VHS TAPES ─── */
-.tape-stage { container-type: size; overflow: hidden; }
+.tape-stage { container-type: size; overflow: visible; }
 .tape {
   --w: max(100px, min(21vw, 48cqh));
   width: var(--w);
   aspect-ratio: 2 / 3;
   container-type: inline-size;
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s, filter 0.6s;
-  will-change: transform;
+  will-change: transform, opacity;
+  cursor: grab;
 }
+.tape-dim { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
 .tape-face {
   position: absolute;
   inset: 0;
@@ -515,14 +516,42 @@ body { font-family: 'IBM Plex Mono', monospace; }
   white-space: nowrap;
   letter-spacing: -0.01em;
   border-radius: 0;
-  animation: brand-type 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: width 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), height 0.5s cubic-bezier(0.2, 0.9, 0.2, 1),
     border-radius 0.5s, box-shadow 0.5s, background-color 0.4s;
   will-change: transform;
 }
-@keyframes brand-type {
-  from { opacity: 0; letter-spacing: 0.32em; filter: blur(8px); }
-  to { opacity: 1; letter-spacing: -0.01em; filter: blur(0); }
+/* the name flickers like the 404: signal drops out, RGB-splits and tears before it settles */
+.brand-type { animation: brand-flicker 1.8s steps(1) both; }
+.brand-collapse { animation: brand-crash 0.55s steps(1) both; }
+@keyframes brand-flicker {
+  0% { opacity: 0; }
+  6% { opacity: 1; transform: translate(-6px, 0) skewX(-8deg); text-shadow: 6px 0 #ff3131, -6px 0 #4d7cff; }
+  10% { opacity: 0.1; transform: none; text-shadow: none; }
+  16% { opacity: 1; transform: translate(5px, 2px); text-shadow: -5px 0 #ff3131, 5px 0 #4d7cff; }
+  22% { opacity: 0; }
+  27% { opacity: 0.9; transform: none; text-shadow: 3px 0 #ff3131, -3px 0 #4d7cff; }
+  34% { opacity: 0.3; text-shadow: none; }
+  40% { opacity: 1; transform: translate(-4px, -2px) skewX(6deg); text-shadow: 8px 0 #ff3131, -8px 0 #4d7cff; }
+  46% { opacity: 1; transform: none; text-shadow: 2px 0 #ff3131, -2px 0 #4d7cff; }
+  54% { opacity: 0.15; text-shadow: none; }
+  58% { opacity: 1; transform: translate(3px, 0); text-shadow: -4px 0 #ff3131, 4px 0 #4d7cff; }
+  68% { opacity: 1; transform: none; text-shadow: 2px 0 #ff3131, -2px 0 #4d7cff; }
+  76% { opacity: 0.6; text-shadow: none; }
+  80% { opacity: 1; transform: translate(-3px, 1px); text-shadow: 5px 0 #ff3131, -5px 0 #4d7cff; }
+  90% { opacity: 1; transform: none; text-shadow: 2px 0 #ff3131, -2px 0 #4d7cff; }
+  94% { opacity: 0.4; text-shadow: none; }
+  100% { opacity: 1; transform: none; text-shadow: none; }
+}
+@keyframes brand-crash {
+  0% { transform: translate(-12px, 0) skewX(-18deg); text-shadow: 12px 0 #ff3131, -12px 0 #4d7cff; filter: brightness(2.2); }
+  12% { transform: translate(10px, 3px) scaleY(1.25); text-shadow: -10px 0 #ff3131, 10px 0 #4d7cff; filter: brightness(1); }
+  24% { transform: translate(-8px, -3px) skewX(14deg) scaleY(0.7); text-shadow: 8px 0 #ff3131, -8px 0 #4d7cff; filter: invert(1); }
+  36% { transform: translate(6px, 2px) scaleY(1.15); text-shadow: -6px 0 #ff3131, 6px 0 #4d7cff; filter: none; opacity: 0.4; }
+  48% { transform: translate(-5px, 0) skewX(-10deg); text-shadow: 6px 0 #ff3131, -6px 0 #4d7cff; filter: brightness(1.8); opacity: 1; }
+  62% { transform: translate(4px, 1px) scaleY(0.85); text-shadow: -4px 0 #ff3131, 4px 0 #4d7cff; filter: none; }
+  78% { transform: translate(-3px, 0); text-shadow: 3px 0 #ff3131, -3px 0 #4d7cff; opacity: 0.5; }
+  90% { transform: none; text-shadow: 2px 0 #ff3131, -2px 0 #4d7cff; opacity: 1; }
+  100% { transform: none; text-shadow: none; filter: none; }
 }
 .b-rest, .b-sp {
   display: inline-block;
@@ -546,5 +575,48 @@ body { font-family: 'IBM Plex Mono', monospace; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-word { animation: none; transition: none; }
+  .brand-word, .brand-type, .brand-collapse { animation: none; transition: none; }
+}
+
+/* header name: on hover it crashes like a bad frame, slicing into halves that jolt apart and snap back */
+.logo-name::before, .logo-name::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.logo-name::before { color: var(--brand); clip-path: inset(0 0 50% 0); }
+.logo-name::after { color: #4d7cff; clip-path: inset(50% 0 0 0); }
+.logo-btn:hover .logo-name, .logo-btn:focus-visible .logo-name { animation: logo-crash 1.1s steps(1) infinite; }
+.logo-btn:hover .logo-name::before, .logo-btn:focus-visible .logo-name::before { animation: logo-slice-a 1.1s steps(1) infinite; }
+.logo-btn:hover .logo-name::after, .logo-btn:focus-visible .logo-name::after { animation: logo-slice-b 1.1s steps(1) infinite; }
+@keyframes logo-crash {
+  0% { transform: translateY(0) scaleY(1); }
+  6% { transform: translateY(3px) scaleY(0.6); }
+  12% { transform: translateY(-2px) scaleY(1.2); filter: invert(1); }
+  18% { transform: translateY(2px) scaleY(0.85); filter: none; }
+  26% { transform: none; }
+  100% { transform: none; }
+}
+@keyframes logo-slice-a {
+  0%, 30%, 100% { opacity: 0; transform: none; }
+  3% { opacity: 1; transform: translate(-14px, -2px); }
+  9% { opacity: 1; transform: translate(10px, 1px); }
+  15% { opacity: 1; transform: translate(-22px, 0); }
+  22% { opacity: 1; transform: translate(6px, 0); }
+}
+@keyframes logo-slice-b {
+  0%, 30%, 100% { opacity: 0; transform: none; }
+  3% { opacity: 1; transform: translate(14px, 2px); }
+  9% { opacity: 1; transform: translate(-10px, 0); }
+  15% { opacity: 1; transform: translate(22px, 1px); }
+  22% { opacity: 1; transform: translate(-6px, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-btn:hover .logo-name, .logo-btn:hover .logo-name::before, .logo-btn:hover .logo-name::after { animation: none; }
 }
