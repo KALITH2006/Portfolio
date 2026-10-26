@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { PAGES } from "./data/content.js";
 import Loader from "./components/Loader.jsx";
 import TvCrash from "./components/TvCrash.jsx";
+import BrandReveal from "./components/BrandReveal.jsx";
+import { blankFavicon, restoreFavicon } from "./favicon.js";
 import TopBar from "./components/TopBar.jsx";
 import BottomBar from "./components/BottomBar.jsx";
 import Tapes from "./components/Tapes.jsx";
@@ -19,8 +21,10 @@ const pageFromPath = (path) => {
 export default function App() {
   const [page, setPage] = useState(() => pageFromPath(window.location.pathname));
   const [crashed, setCrashed] = useState(false);
-  const [booted, setBooted] = useState(false);
+  const [loaded, setLoaded] = useState(false); // loader reached 100%
+  const [booted, setBooted] = useState(false); // page starts easing in
   const [loaderGone, setLoaderGone] = useState(false);
+  const [brandDone, setBrandDone] = useState(false);
   const [bw, setBw] = useState(false);
   const [toast, setToast] = useState(null);
   const timer = useRef();
@@ -32,12 +36,19 @@ export default function App() {
   }, []);
   useEffect(() => () => clearTimeout(timer.current), []);
 
-  // keep the loader mounted while it fades out over the page coming in
+  // The tab icon stays blank until the MK badge arrives (restored by BrandReveal; the timeout is a safety net).
   useEffect(() => {
-    if (!booted) return;
+    blankFavicon();
+    const t = setTimeout(restoreFavicon, 20000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // keep the loader mounted while it fades out over the brand reveal
+  useEffect(() => {
+    if (!loaded) return;
     const t = setTimeout(() => setLoaderGone(true), 900);
     return () => clearTimeout(t);
-  }, [booted]);
+  }, [loaded]);
 
   const navigate = useCallback((id, hash = "") => {
     const target = PAGES.find((p) => p.id === id);
@@ -76,8 +87,9 @@ export default function App() {
         {!crashed ? (
           <TvCrash onDone={() => setCrashed(true)} />
         ) : (
-          !loaderGone && <Loader leaving={booted} onDone={() => setBooted(true)} />
+          !loaderGone && <Loader leaving={loaded} onDone={() => setLoaded(true)} />
         )}
+        {loaded && !brandDone && <BrandReveal onReveal={() => setBooted(true)} onFinish={() => setBrandDone(true)} />}
 
         <div id="toast" role="status" aria-live="polite" className={toast ? `show ${toast.type}` : ""}>
           {toast?.msg}

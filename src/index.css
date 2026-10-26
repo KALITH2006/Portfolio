@@ -487,3 +487,64 @@ body { font-family: 'IBM Plex Mono', monospace; }
   .stage { transition: none; }
   .vcr-out { animation: none; opacity: 0; }
 }
+
+/* ─── BRAND REVEAL: MOHAMED KALITH → MK → favicon ─── */
+.brand-veil { background: radial-gradient(ellipse at 50% 45%, #1c1c1c 0%, #0c0c0c 100%); }
+.brand-veil-out { animation: veil-out 0.9s ease forwards; pointer-events: none; }
+@keyframes veil-out { to { opacity: 0; } }
+
+.brand-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.brand-word {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.1em;
+  font-family: 'Arial Black', Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 7vw, 6rem);
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  border-radius: 0;
+  animation: brand-type 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: width 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), height 0.5s cubic-bezier(0.2, 0.9, 0.2, 1),
+    border-radius 0.5s, box-shadow 0.5s, background-color 0.4s;
+  will-change: transform;
+}
+@keyframes brand-type {
+  from { opacity: 0; letter-spacing: 0.32em; filter: blur(8px); }
+  to { opacity: 1; letter-spacing: -0.01em; filter: blur(0); }
+}
+.b-rest, .b-sp {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: max-width 0.55s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.4s, letter-spacing 0.55s;
+}
+.b-rest { max-width: 6em; }
+.b-sp { max-width: 0.5em; }
+.brand-collapse .b-rest, .brand-badge .b-rest, .brand-fly .b-rest { max-width: 0; opacity: 0; letter-spacing: -0.3em; }
+.brand-collapse .b-sp, .brand-badge .b-sp, .brand-fly .b-sp { max-width: 0; }
+
+/* the favicon: rounded red square holding the MK */
+.brand-badge, .brand-fly {
+  width: 2.3em;
+  height: 2.3em;
+  border-radius: 0.5em;
+  background: linear-gradient(to bottom, #ff5c5c, #b01010);
+  box-shadow: 0 0 60px rgba(255, 49, 49, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-word { animation: none; transition: none; }
+}
