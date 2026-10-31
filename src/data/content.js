@@ -79,7 +79,7 @@ PROJECTS.push({
     "Discover the most popular GitHub repositories by field without digging through GitHub. Twelve domains (AI, ML, Cybersecurity, Robotics and more) plus free-text search, filtering, sorting and CSV export, powered by the GitHub Search API with caching and rate-limit fallback.",
   tech: ["Flask", "Python", "GitHub API", "JavaScript", "Vercel"],
   github: "https://github.com/KALITH2006/repo-atlas",
-  demo: null,
+  demo: "https://repo-atlas-seven.vercel.app/",
 });
 
 export const CERT_CATEGORIES = ["AI & ML", "Generative AI", "Data & Analytics", "Programming & Cloud"];
