@@ -71,6 +71,17 @@ PROJECTS.push({
   demo: null,
 });
 
+PROJECTS.push({
+  title: "Repo Atlas",
+  visual: "/projects/repo-atlas.png",
+  badge: "WEB APP",
+  description:
+    "Discover the most popular GitHub repositories by field without digging through GitHub. Twelve domains (AI, ML, Cybersecurity, Robotics and more) plus free-text search, filtering, sorting and CSV export, powered by the GitHub Search API with caching and rate-limit fallback.",
+  tech: ["Flask", "Python", "GitHub API", "JavaScript", "Vercel"],
+  github: "https://github.com/KALITH2006/repo-atlas",
+  demo: null,
+});
+
 export const CERT_CATEGORIES = ["AI & ML", "Generative AI", "Data & Analytics", "Programming & Cloud"];
 
 // date: "YYYY-MM" (used for sorting); file: served from /public/certificates
@@ -115,6 +126,7 @@ const TAPES = {
   "Smart Berth Allocation System": { tagline: "Real-time vessel tracking and berth scheduling for port automation.", short: ["SMART", "BERTH"], year: "2025", tone: "#d8c24a" },
   "AI Chat Summariser": { tagline: "NLP summaries, emotion detection and session passports for AI chats.", short: ["CHAT", "SUMMARY"], year: "2026", tone: "#6d6ff5" },
   "Smart Automobile User Manual Assistant": { tagline: "Ask a vehicle manual anything and get answers cited to the exact pages.", short: ["MANUAL", "ASSIST"], year: "2026", tone: "#41d392" },
+  "Repo Atlas": { tagline: "Discover the most popular GitHub repositories by field.", short: ["REPO", "ATLAS"], year: "2026", tone: "#4fb8e0" },
 };
 PROJECTS.forEach((p) => Object.assign(p, TAPES[p.title]));
 
